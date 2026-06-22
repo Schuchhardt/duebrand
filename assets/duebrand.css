@@ -1,0 +1,203 @@
+/*
+ * Due Brand — Custom Theme Styles
+ * Quiet luxury aesthetic: warm palette, editorial typography, refined spacing
+ * -------------------------------------------------------------------------
+ */
+
+/* ─── Google Fonts fallback: Playfair Display ─────────────────────────────── */
+:root {
+  --font-heading--family: 'Playfair Display', var(--font-heading--family, Georgia, serif);
+  --font-accent--family: 'Playfair Display', var(--font-accent--family, Georgia, serif);
+}
+
+/* ─── Refined letter-spacing for body text ───────────────────────────────── */
+body,
+p,
+li,
+td {
+  letter-spacing: 0.01em;
+}
+
+/* ─── Navigation: uppercase, wide tracking, minimal weight ──────────────── */
+.header__menu-item,
+.header__menu-link,
+.mega-menu__link,
+nav a {
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+}
+
+/* ─── Logo: slightly more breathing room ────────────────────────────────── */
+.header__logo {
+  letter-spacing: 0.15em;
+}
+
+/* ─── Announcement bar: refined ─────────────────────────────────────────── */
+.announcement-bar__message {
+  letter-spacing: 0.1em;
+  font-size: 0.75rem;
+}
+
+/* ─── Buttons: sharp, uppercase, elegant transitions ────────────────────── */
+.button,
+.btn,
+[type='submit'],
+button.shopify-payment-button__button {
+  letter-spacing: 0.12em;
+  font-size: 0.75rem;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Primary button hover: lighten to Taupe ───────────────────────────────── */
+.button--primary:hover,
+.button--full-width.button--primary:hover {
+  opacity: 0.85;
+}
+
+/* ─── Product cards: editorial spacing, no border radius ────────────────── */
+.card {
+  border-radius: 0;
+  overflow: hidden;
+}
+
+.card__image-wrapper {
+  overflow: hidden;
+}
+
+/* Subtle image zoom on card hover ──────────────────────────────────────── */
+.card__image-wrapper img {
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.card:hover .card__image-wrapper img {
+  transform: scale(1.03);
+}
+
+/* ─── Product title: Playfair with editorial weight ─────────────────────── */
+.card__heading,
+.product-information__title,
+.featured-product__title {
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+/* ─── Price: Inter, slightly muted ──────────────────────────────────────── */
+.price,
+.price__regular,
+.price__sale {
+  letter-spacing: 0.05em;
+}
+
+/* ─── Badges: uppercase, sharp ──────────────────────────────────────────── */
+.badge {
+  letter-spacing: 0.1em;
+  font-size: 0.625rem;
+  font-weight: 500;
+}
+
+/* ─── Section headings: editorial scale ─────────────────────────────────── */
+.section__heading,
+.section-header__heading {
+  font-weight: 400;
+  letter-spacing: 0.03em;
+}
+
+/* ─── Form inputs: clean, minimal ───────────────────────────────────────── */
+input[type='text'],
+input[type='email'],
+input[type='tel'],
+input[type='search'],
+textarea,
+select {
+  border-radius: 2px;
+  letter-spacing: 0.02em;
+  font-size: 0.875rem;
+}
+
+input[type='text']:focus,
+input[type='email']:focus,
+input[type='tel']:focus,
+input[type='search']:focus,
+textarea:focus {
+  outline: 1px solid #A08976;
+  outline-offset: 0;
+}
+
+/* ─── Cart drawer: refined spacing ──────────────────────────────────────── */
+.cart-drawer__title {
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* ─── Footer: editorial, uppercase labels ───────────────────────────────── */
+.footer .menu__heading,
+.footer__heading,
+.footer-column__heading {
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.footer a {
+  letter-spacing: 0.04em;
+  font-size: 0.875rem;
+  opacity: 0.85;
+  transition: opacity 0.2s ease;
+}
+
+.footer a:hover {
+  opacity: 1;
+}
+
+/* ─── Dividers: subtle ──────────────────────────────────────────────────── */
+hr,
+.divider {
+  border-color: rgba(160, 137, 118, 0.3);
+}
+
+/* ─── Search modal: refined ─────────────────────────────────────────────── */
+.search-modal__input {
+  letter-spacing: 0.05em;
+}
+
+/* ─── Marquee / announcement: refined tracking ──────────────────────────── */
+.marquee__item {
+  letter-spacing: 0.1em;
+  font-size: 0.75rem;
+}
+
+/* ─── Breadcrumbs / pagination: small, uppercase ───────────────────────── */
+.breadcrumbs,
+.pagination {
+  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+/* ─── Scrollbar: warm palette ───────────────────────────────────────────── */
+html {
+  scrollbar-color: #A08976 #F6F2EE;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F6F2EE;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #A08976;
+  border-radius: 0;
+}
+
+/* ─── Selection color: brand palette ────────────────────────────────────── */
+::selection {
+  background-color: #E6D8C8;
+  color: #2F2925;
+}
