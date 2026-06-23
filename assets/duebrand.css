@@ -202,6 +202,31 @@ html {
   color: #2F2925;
 }
 
+/* ─── Menú: línea debajo al hacer hover (igual que Impulse) ─────────────── */
+.menu-list__link:hover,
+.menu-list__link[aria-current='page'] {
+  text-decoration: underline !important;
+  text-decoration-thickness: 1px !important;
+  text-underline-offset: 4px !important;
+  text-decoration-color: white !important;
+}
+
+/* ─── Header transparente: texto blanco (como Impulse) ──────────────────── */
+.header[transparent]:not([data-sticky-state='active']) .menu-list__link,
+.header[transparent]:not([data-sticky-state='active']) a.header-logo,
+.header[transparent]:not([data-sticky-state='active']) a.header-logo *,
+.header[transparent]:not([data-sticky-state='active']) .header-actions__action,
+.header[transparent]:not([data-sticky-state='active']) .header__row svg {
+  color: #FFFFFF !important;
+  fill: #FFFFFF !important;
+}
+
+/* ─── Header transparente: sin panel crema al hacer hover en menú ───────── */
+.header[transparent]:has(.menu-list__link:hover),
+.header[transparent]:has(.menu-list__link:focus) {
+  --closed-underlay-height: 0px !important;
+}
+
 /* ─── Header dropdown/mega-menu: fondo blanco limpio ───────────────────── */
 .header__mega-menu,
 .mega-menu,
@@ -220,9 +245,3 @@ html {
   color: #1C1C1A !important;
 }
 
-/* ─── Header fondo blanco sólido ────────────────────────────────────────── */
-.header-section,
-.header-wrapper,
-header.header {
-  background-color: #FFFFFF;
-}

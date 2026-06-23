@@ -63,7 +63,7 @@
             "menu_font_style": "inverse",
             "type_font_primary_link": "subheading",
             "type_case_primary_link": "uppercase",
-            "menu_style": "featured_products",
+            "menu_style": "links",
             "featured_products_aspect_ratio": "4 / 5",
             "featured_collections_aspect_ratio": "16 / 9",
             "image_border_radius": 0,
@@ -95,7 +95,7 @@
         "divider_width": 0,
         "divider_size": "full-width",
         "border_width": 0,
-        "enable_transparent_header_home": false,
+        "enable_transparent_header_home": true,
         "enable_transparent_header_product": false,
         "enable_transparent_header_collection": false
       }
