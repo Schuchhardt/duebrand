@@ -201,3 +201,28 @@ html {
   background-color: #E6D8C8;
   color: #2F2925;
 }
+
+/* ─── Header dropdown/mega-menu: fondo blanco limpio ───────────────────── */
+.header__mega-menu,
+.mega-menu,
+.header__submenu,
+.header-section__mega-menu,
+[data-mega-menu],
+.header__dropdown {
+  background-color: #FFFFFF !important;
+  color: #1C1C1A !important;
+  border-top: 1px solid #E8E2DC !important;
+}
+
+.mega-menu__link,
+.header__submenu a,
+.header__dropdown a {
+  color: #1C1C1A !important;
+}
+
+/* ─── Header fondo blanco sólido ────────────────────────────────────────── */
+.header-section,
+.header-wrapper,
+header.header {
+  background-color: #FFFFFF;
+}
