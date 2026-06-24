@@ -202,6 +202,40 @@ html {
   color: #2F2925;
 }
 
+/* ─── Menú: items llenan toda la altura del header para hover correcto ───── */
+.header .header-menu .menu-list__list-item {
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+}
+
+.header .header-menu .menu-list__link {
+  height: 100%;
+  display: flex !important;
+  align-items: center !important;
+  padding-inline: 4px;
+}
+
+/* ─── Menú: submenu con fondo elegante ───────────────────────────────────── */
+.menu-list__submenu {
+  background-color: #FAFAF8 !important;
+  border-top: 1px solid #DDD6CE !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06) !important;
+}
+
+.menu-list__submenu a,
+.mega-menu a,
+.mega-menu__link {
+  color: #1C1C1A !important;
+}
+
+/* ─── Menú: flecha (▾) en items con sub-menú, igual que Impulse ─────────── */
+.menu-list__link[aria-haspopup='true'] .menu-list__link-title::after {
+  content: ' ▾';
+  font-size: 0.75em;
+  opacity: 0.8;
+}
+
 /* ─── Menú: línea debajo al hacer hover (igual que Impulse) ─────────────── */
 .menu-list__link:hover,
 .menu-list__link[aria-current='page'] {
@@ -221,9 +255,9 @@ html {
   fill: #FFFFFF !important;
 }
 
-/* ─── Header transparente: sin panel crema al hacer hover en menú ───────── */
-.header[transparent]:has(.menu-list__link:hover),
-.header[transparent]:has(.menu-list__link:focus) {
+/* ─── Header transparente: sin panel crema al hacer hover (solo cuando está arriba) ── */
+.header[transparent]:not([data-sticky-state='active']):has(.menu-list__link:hover),
+.header[transparent]:not([data-sticky-state='active']):has(.menu-list__link:focus) {
   --closed-underlay-height: 0px !important;
 }
 
