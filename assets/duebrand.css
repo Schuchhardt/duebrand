@@ -246,11 +246,11 @@ html {
 }
 
 /* ─── Header transparente: texto blanco (como Impulse) ──────────────────── */
-.header[transparent]:not([data-sticky-state='active']) .menu-list__link,
-.header[transparent]:not([data-sticky-state='active']) a.header-logo,
-.header[transparent]:not([data-sticky-state='active']) a.header-logo *,
-.header[transparent]:not([data-sticky-state='active']) .header-actions__action,
-.header[transparent]:not([data-sticky-state='active']) .header__row svg {
+.header[transparent]:not([data-sticky-state='active']):not(:has(.menu-list__link[aria-expanded='true'])) .menu-list__link,
+.header[transparent]:not([data-sticky-state='active']):not(:has(.menu-list__link[aria-expanded='true'])) a.header-logo,
+.header[transparent]:not([data-sticky-state='active']):not(:has(.menu-list__link[aria-expanded='true'])) a.header-logo *,
+.header[transparent]:not([data-sticky-state='active']):not(:has(.menu-list__link[aria-expanded='true'])) .header-actions__action,
+.header[transparent]:not([data-sticky-state='active']):not(:has(.menu-list__link[aria-expanded='true'])) .header__row svg {
   color: #FFFFFF !important;
   fill: #FFFFFF !important;
 }
