@@ -28,11 +28,11 @@
         "vertical_alignment": "flex-end",
         "align_baseline": true,
         "horizontal_alignment_flex_direction_column": "flex-start",
-        "vertical_alignment_flex_direction_column": "flex-end",
-        "gap": 24,
+        "vertical_alignment_flex_direction_column": "space-between",
+        "gap": 94,
         "section_width": "full-width",
-        "section_height": "large",
-        "section_height_custom": 50,
+        "section_height": "full-screen",
+        "section_height_custom": 100,
         "background_color": "",
         "toggle_overlay": true,
         "overlay_color": "#0000004d",
@@ -41,7 +41,7 @@
         "blurred_reflection": false,
         "reflection_opacity": 75,
         "padding-block-start": 0,
-        "padding-block-end": 48
+        "padding-block-end": 100
       }
     },
     "product_list_fa6P9H": {
