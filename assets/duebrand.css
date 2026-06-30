@@ -203,16 +203,30 @@ html {
 }
 
 /* ─── Menú: items llenan toda la altura del header para hover correcto ───── */
-.header .header-menu .menu-list__list-item {
+/* El item debe ocupar TODA la altura del header y ser una sola zona de hover
+   alineada con el texto. Forzamos flex-direction: row (el tema lo deja en
+   'column', lo que junto al espaciador ::after desalineaba la zona activa del
+   submenú respecto al texto -> había que bajar el mouse para abrirlo). */
+.header .header-menu .menu-list__list-item:not([slot='overflow']) {
   align-self: stretch;
   display: flex;
-  align-items: center;
+  flex-direction: row;
+  align-items: stretch;
 }
 
-.header .header-menu .menu-list__link {
+/* Neutralizamos el espaciador inferior del tema: el "puente" hacia el submenú
+   ya lo gestiona el JS (safety box), y este ::after creaba una franja activa
+   por debajo del texto que confundía el hover. */
+.header .header-menu .menu-list__list-item:not([slot='overflow'])::after {
+  display: none;
+}
+
+.header .header-menu .menu-list__list-item:not([slot='overflow']) > .menu-list__link {
   height: 100%;
   display: flex !important;
+  flex-direction: row !important;
   align-items: center !important;
+  justify-content: center;
   padding-inline: 4px;
 }
 
@@ -236,7 +250,7 @@ html {
   opacity: 0.8;
 }
 
-/* ─── Menú: línea debajo al hacer hover (igual que Impulse) ─────────────── */
+/* ─── Menú: línea debajo al hacer hover ─────────────── */
 .menu-list__link:hover,
 .menu-list__link[aria-current='page'] {
   text-decoration: underline !important;
@@ -245,7 +259,7 @@ html {
   text-decoration-color: white !important;
 }
 
-/* ─── Header transparente: texto blanco (como Impulse) ──────────────────── */
+/* ─── Header transparente: texto blanco  ──────────────────── */
 .header[transparent]:not([data-sticky-state='active']):not(:has(.menu-list__link[aria-expanded='true'])) .menu-list__link,
 .header[transparent]:not([data-sticky-state='active']):not(:has(.menu-list__link[aria-expanded='true'])) a.header-logo,
 .header[transparent]:not([data-sticky-state='active']):not(:has(.menu-list__link[aria-expanded='true'])) a.header-logo *,
