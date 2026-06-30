@@ -293,3 +293,111 @@ html {
   color: #1C1C1A !important;
 }
 
+/* ─── Barra de utilidad superior del header (estilo Impulse) ─────────────── */
+/* Fila propia dentro del header: enlaces (izq) + redes + país (der).
+   Usa .header__row para heredar el color de texto en modo transparente. */
+.header__utility {
+  position: relative;
+  z-index: 1;
+}
+
+.header__utility-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-block: 8px;
+  padding-inline: var(--page-margin, 40px);
+  font-size: 0.6875rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-foreground);
+  border-bottom: 1px solid rgb(var(--color-foreground-rgb) / 0.12);
+}
+
+.header__utility-links {
+  display: flex;
+  gap: 22px;
+}
+
+.header__utility-links a,
+.header__utility-social a {
+  color: inherit;
+  text-decoration: none;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+
+.header__utility-links a:hover,
+.header__utility-social a:hover {
+  opacity: 1;
+}
+
+.header__utility-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.header__utility-social {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header__utility-social svg {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
+/* Selector de país/moneda (Chile / Colombia) */
+.header__utility-loc {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  opacity: 0.85;
+  white-space: nowrap;
+}
+
+.header__utility-loc::after {
+  content: '\25BE';
+  font-size: 0.85em;
+  margin-left: 5px;
+  pointer-events: none;
+}
+
+.header__utility-select {
+  background: transparent;
+  border: none;
+  color: inherit;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.header__utility-select option {
+  color: #1C1C1A;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+/* Texto e íconos blancos sobre el hero (header transparente) */
+.header[transparent]:not([data-sticky-state='active']):not(:has(.menu-list__link[aria-expanded='true'])) .header__utility-inner,
+.header[transparent]:not([data-sticky-state='active']):not(:has(.menu-list__link[aria-expanded='true'])) .header__utility-inner a,
+.header[transparent]:not([data-sticky-state='active']):not(:has(.menu-list__link[aria-expanded='true'])) .header__utility-select {
+  color: #FFFFFF;
+}
+
+/* En móvil se oculta la barra de utilidad (igual que Impulse) */
+@media screen and (max-width: 749px) {
+  .header__utility {
+    display: none;
+  }
+}
+
