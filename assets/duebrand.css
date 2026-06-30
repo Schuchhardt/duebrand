@@ -266,7 +266,6 @@ html {
 .header[transparent]:not([data-sticky-state='active']):not(:has(.menu-list__link[aria-expanded='true'])) .header-actions__action,
 .header[transparent]:not([data-sticky-state='active']):not(:has(.menu-list__link[aria-expanded='true'])) .header__row svg {
   color: #FFFFFF !important;
-  fill: #FFFFFF !important;
 }
 
 /* ─── Header transparente: sin panel crema al hacer hover (solo cuando está arriba) ── */
