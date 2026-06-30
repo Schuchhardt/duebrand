@@ -369,7 +369,7 @@
   {%- endif -%}
 
   {%- comment -%} Barra de utilidad superior (estilo Impulse): enlaces + redes + país {%- endcomment -%}
-  <div class="header__row header__utility">
+  <div class="header__row header__utility section section--full-width-margin section--{{ section.settings.section_width }}">
     <div class="header__utility-inner">
       <nav class="header__utility-links" aria-label="Utility">
         {%- if linklists['utility-bar'].links.size > 0 -%}

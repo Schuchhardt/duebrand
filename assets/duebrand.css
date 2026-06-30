@@ -306,7 +306,6 @@ html {
   justify-content: space-between;
   gap: 16px;
   padding-block: 8px;
-  padding-inline: var(--page-margin, 40px);
   font-size: 0.6875rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
