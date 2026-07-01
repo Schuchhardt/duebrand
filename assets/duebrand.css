@@ -4,12 +4,6 @@
  * -------------------------------------------------------------------------
  */
 
-/* ─── Google Fonts fallback: Playfair Display ─────────────────────────────── */
-:root {
-  --font-heading--family: 'Playfair Display', var(--font-heading--family, Georgia, serif);
-  --font-accent--family: 'Playfair Display', var(--font-accent--family, Georgia, serif);
-}
-
 /* ─── Refined letter-spacing for body text ───────────────────────────────── */
 body,
 p,
