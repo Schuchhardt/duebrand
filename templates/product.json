@@ -16,15 +16,15 @@
           "type": "_product-media-gallery",
           "static": true,
           "settings": {
-            "media_presentation": "grid",
+            "media_presentation": "carousel",
             "media_columns": "two",
             "image_gap": 4,
             "large_first_image": false,
             "icons_style": "arrow",
-            "slideshow_controls_style": "counter",
+            "slideshow_controls_style": "thumbnails",
             "slideshow_mobile_controls_style": "dots",
-            "thumbnail_position": "right",
-            "thumbnail_width": 44,
+            "thumbnail_position": "left",
+            "thumbnail_width": 64,
             "aspect_ratio": "adapt",
             "constrain_to_viewport": true,
             "media_fit": "contain",
@@ -128,6 +128,55 @@
                   },
                   "blocks": {}
                 },
+                "group_feature": {
+                  "type": "group",
+                  "name": "Feature line",
+                  "settings": {
+                    "content_direction": "row",
+                    "vertical_on_mobile": false,
+                    "horizontal_alignment": "flex-start",
+                    "vertical_alignment": "center",
+                    "align_baseline": false,
+                    "gap": 8,
+                    "width": "fit-content",
+                    "custom_width": 100,
+                    "height": "fit",
+                    "background_media": "none",
+                    "border": "none",
+                    "border_width": 1,
+                    "border_opacity": 100,
+                    "border_radius": 0,
+                    "padding-block-start": 2,
+                    "padding-block-end": 2,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {
+                    "feature_icon": {
+                      "type": "icon",
+                      "settings": {
+                        "icon": "leaf",
+                        "width": 18
+                      },
+                      "blocks": {}
+                    },
+                    "feature_text": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>Diseño editorial · Calidad atemporal</p>",
+                        "width": "fit-content",
+                        "alignment": "left",
+                        "type_preset": "paragraph",
+                        "font_size": "0.8125rem"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "feature_icon",
+                    "feature_text"
+                  ]
+                },
                 "price_tVjtKg": {
                   "type": "price",
                   "settings": {
@@ -152,6 +201,7 @@
               },
               "block_order": [
                 "text_xpVMaM",
+                "group_feature",
                 "price_tVjtKg"
               ]
             },
@@ -240,14 +290,100 @@
                 "padding-inline-end": 0
               },
               "blocks": {}
+            },
+            "accordion_details": {
+              "type": "accordion",
+              "name": "Detalles del producto",
+              "settings": {
+                "icon": "caret",
+                "dividers": true,
+                "type_preset": "h6",
+                "border": "none",
+                "border_radius": 0,
+                "padding-block-start": 8,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {
+                "row_materials": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Materiales y cuidado",
+                    "open_by_default": false
+                  },
+                  "blocks": {
+                    "text_materials": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>Confeccionado con tejido de alta calidad, de tacto suave y excelente recuperación.</p><ul><li>Lavar a mano o en ciclo delicado con agua fría</li><li>No usar secadora</li><li>Planchar a baja temperatura si es necesario</li><li>No usar blanqueador</li></ul>",
+                        "width": "100%"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text_materials"
+                  ]
+                },
+                "row_shipping": {
+                  "type": "_accordion-row",
+                  "settings": {
+                    "heading": "Envíos y devoluciones",
+                    "open_by_default": false
+                  },
+                  "blocks": {
+                    "text_shipping": {
+                      "type": "text",
+                      "settings": {
+                        "text": "<p>Envíos a todo Chile y Colombia. Despacho en 24 a 48 horas hábiles.</p><p>Aceptamos cambios y devoluciones dentro de los 30 días posteriores a la compra, siempre que la prenda conserve su estado y etiquetas originales.</p>",
+                        "width": "100%"
+                      },
+                      "blocks": {}
+                    }
+                  },
+                  "block_order": [
+                    "text_shipping"
+                  ]
+                }
+              },
+              "block_order": [
+                "row_materials",
+                "row_shipping"
+              ]
+            },
+            "inventory_status": {
+              "type": "product-inventory",
+              "settings": {
+                "inventory_threshold": 10,
+                "show_inventory_quantity": false,
+                "padding-block-start": 2,
+                "padding-block-end": 2,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "share_buttons": {
+              "type": "share-buttons",
+              "settings": {
+                "padding-block-start": 16,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
             }
           },
           "block_order": [
             "group_icgrde",
+            "text_aEtTtq",
             "divider_VJhene",
             "variant_picker_R3rGDr",
+            "inventory_status",
             "buy_buttons_eYQEYi",
-            "text_aEtTtq"
+            "accordion_details",
+            "share_buttons"
           ]
         },
         "disclosures": {

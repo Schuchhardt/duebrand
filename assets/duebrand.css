@@ -174,7 +174,7 @@ hr,
 
 /* ─── Scrollbar: warm palette ───────────────────────────────────────────── */
 html {
-  scrollbar-color: #A08976 #F6F2EE;
+  scrollbar-color: #A08976 #F2EFEA;
 }
 
 ::-webkit-scrollbar {
@@ -182,7 +182,7 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: #F6F2EE;
+  background: #F2EFEA;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -391,5 +391,116 @@ html {
   .header__utility {
     display: none;
   }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   PÁGINA DE PRODUCTO — estética Impulse
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Título del producto: grande y editorial, como Impulse */
+.product-information .product-information__title,
+.product-information h1 {
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  line-height: 1.15;
+}
+
+/* Precio con más presencia */
+.product-information .price {
+  font-size: 1.125rem;
+  letter-spacing: 0.03em;
+}
+
+/* Descripción: interlineado cómodo y listas con buen espaciado (como Impulse) */
+.product-information .rte p {
+  line-height: 1.65;
+}
+
+.product-information .rte ul {
+  margin-block: 0.75rem;
+  padding-inline-start: 1.25rem;
+}
+
+.product-information .rte li {
+  margin-block: 0.35rem;
+  line-height: 1.5;
+}
+
+/* Botones de compra apilados: cantidad arriba, Add to cart full-width */
+.product-information .product-form-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 14px;
+}
+
+/* La cantidad no se estira: se queda a la izquierda con su ancho natural */
+.product-information .product-form-buttons .quantity-selector-wrapper {
+  align-self: flex-start;
+}
+
+/* Add to cart: full-width, tipo píldora, oscuro (igual que Impulse) */
+.product-information .add-to-cart-button.button {
+  width: 100%;
+  border-radius: 999px;
+  padding-block: 17px;
+  font-size: 0.8125rem;
+  letter-spacing: 0.18em;
+}
+
+/* Pago acelerado (PayPal / Shop Pay): misma forma píldora que Add to cart.
+   El botón de PayPal se dibuja dentro de un iframe/div propio, así que
+   redondeamos también ese contenedor y recortamos con overflow. */
+.product-information .shopify-payment-button__button {
+  border-radius: 999px !important;
+  overflow: hidden;
+}
+
+.product-information .shopify-payment-button > div,
+.product-information .shopify-payment-button iframe,
+.product-information .shopify-payment-button .zoid-outlet,
+.product-information .shopify-payment-button [id*='zoid'] {
+  border-radius: 999px !important;
+  overflow: hidden !important;
+}
+
+/* Botones de variante (Color / Talla): rectangulares con borde, estilo Impulse */
+.product-information .variant-option__button-label,
+.product-information .variant-option label {
+  border-radius: 2px;
+  letter-spacing: 0.08em;
+}
+
+/* Etiquetas Color / Talla: en mayúscula sutil como Impulse */
+.product-information .variant-option__label,
+.product-information legend {
+  letter-spacing: 0.06em;
+}
+
+/* Acordeón estilo Impulse: cada fila en caja con borde completo ─────────── */
+/* Encabezados en mayúscula fina */
+.product-information .accordion .details__header {
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  padding-block: 16px;
+  padding-inline: 18px;
+}
+
+/* Caja con borde alrededor de cada fila; se comparte el borde entre filas
+   para que se vean como rectángulos apilados y conectados (como Impulse). */
+.product-information .accordion accordion-custom .details {
+  border: 1px solid rgba(47, 41, 37, 0.16) !important;
+}
+
+.product-information .accordion accordion-custom:not(:first-child) .details {
+  border-block-start: none !important;
+}
+
+/* Relleno del contenido alineado con el encabezado */
+.product-information .accordion .details-content {
+  padding-inline: 18px;
+  padding-block-end: 16px;
 }
 

@@ -1,0 +1,170 @@
+{%- doc -%}
+  Botones de compartir (Facebook / X / Pinterest) para la página de producto.
+  Comparten la URL del producto actual. Estilo Impulse: icono + etiqueta en fila.
+{%- enddoc -%}
+
+{% liquid
+  assign product = closest.product
+  if request.visual_preview_mode and product == blank
+    assign product = collections.all.products.first
+  endif
+
+  assign share_url = shop.secure_url | append: product.url
+  assign share_title = product.title | default: shop.name
+  assign share_image = product.featured_image | image_url: width: 1200
+
+  assign fb_url = 'https://www.facebook.com/sharer/sharer.php?u=' | append: share_url | url_encode
+  assign x_url = 'https://twitter.com/intent/tweet?text=' | append: share_title | url_encode | append: '&url=' | append: share_url | url_encode
+  capture pin_url
+    echo 'https://www.pinterest.com/pin/create/button/?url='
+    echo share_url | url_encode
+    echo '&description='
+    echo share_title | url_encode
+    if share_image != blank
+      echo '&media='
+      echo share_image | prepend: 'https:' | url_encode
+    endif
+  endcapture
+%}
+
+<div
+  class="share-buttons spacing-style"
+  style="{% render 'spacing-style', settings: block.settings %}"
+  {{ block.shopify_attributes }}
+>
+  <a
+    class="share-buttons__item"
+    href="{{ fb_url }}"
+    target="_blank"
+    rel="noopener"
+    aria-label="Compartir en Facebook"
+    onclick="window.open(this.href,'share','width=600,height=520,noopener');return false;"
+  >
+    <span class="share-buttons__icon">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 22v-8h2.7l.4-3H13V9.1c0-.9.3-1.5 1.6-1.5H16V5c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 4v2.1H7.5v3H10v8h3Z"/></svg>
+    </span>
+    <span class="share-buttons__label">Compartir</span>
+  </a>
+
+  <a
+    class="share-buttons__item"
+    href="{{ x_url }}"
+    target="_blank"
+    rel="noopener"
+    aria-label="Compartir en X"
+    onclick="window.open(this.href,'share','width=600,height=520,noopener');return false;"
+  >
+    <span class="share-buttons__icon">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.53 3H20.5l-6.5 7.43L21.75 21h-6l-4.7-6.14L5.68 21H2.7l6.96-7.95L2.25 3h6.15l4.25 5.62L17.53 3Zm-1.05 16.2h1.65L7.6 4.7H5.83L16.48 19.2Z"/></svg>
+    </span>
+    <span class="share-buttons__label">Compartir</span>
+  </a>
+
+  <a
+    class="share-buttons__item"
+    href="{{ pin_url | strip_newlines }}"
+    target="_blank"
+    rel="noopener"
+    aria-label="Guardar en Pinterest"
+    onclick="window.open(this.href,'share','width=600,height=520,noopener');return false;"
+  >
+    <span class="share-buttons__icon">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.6 19.3c-.1-.8-.1-2 0-2.9l1.2-5.1s-.3-.6-.3-1.5c0-1.4.8-2.5 1.9-2.5.9 0 1.3.7 1.3 1.5 0 .9-.6 2.2-.9 3.5-.2 1 .5 1.9 1.6 1.9 1.9 0 3.2-2.4 3.2-5.3 0-2.2-1.5-3.8-4.2-3.8a4.7 4.7 0 0 0-4.9 4.7c0 .9.3 1.5.7 2 .2.2.2.3.1.6l-.2.9c-.1.3-.3.4-.6.2-1.2-.5-1.7-1.8-1.7-3.3 0-2.5 2.1-5.4 6.2-5.4 3.3 0 5.5 2.4 5.5 5 0 3.4-1.9 5.9-4.6 5.9-.9 0-1.8-.5-2.1-1.1l-.6 2.2c-.2.8-.6 1.5-1 2.1A10 10 0 1 0 12 2Z"/></svg>
+    </span>
+    <span class="share-buttons__label">Pinear</span>
+  </a>
+</div>
+
+{% stylesheet %}
+  .share-buttons {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    flex-wrap: wrap;
+  }
+
+  .share-buttons__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--color-foreground);
+    text-decoration: none;
+    font-size: 0.8125rem;
+    letter-spacing: 0.02em;
+    opacity: 0.85;
+    transition: opacity 0.2s ease;
+  }
+
+  .share-buttons__item:hover {
+    opacity: 1;
+  }
+
+  .share-buttons__icon {
+    display: inline-flex;
+    width: 22px;
+    height: 22px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--color-foreground);
+    color: var(--color-background);
+  }
+
+  .share-buttons__icon svg {
+    width: 13px;
+    height: 13px;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Botones de compartir",
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 8
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "t:settings.left",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "t:settings.right",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ]
+}
+{% endschema %}
