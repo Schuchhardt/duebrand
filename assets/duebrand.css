@@ -642,3 +642,16 @@ html {
   }
 }
 
+/* ─── Botón "ghost" tipo Impulse — banner "Enfoque en la sostenibilidad" ────
+   Scoped a esta sección hero para no afectar otros botones del sitio.
+   Si borras y vuelves a agregar la sección, actualiza el id del selector. */
+#shopify-section-hero_h39Wmm .button-custom {
+  border-radius: 100px;
+  border-width: 1px;
+  padding-block: 15px;
+  padding-inline: 42px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.8rem;
+}
+
