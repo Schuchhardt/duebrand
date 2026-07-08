@@ -26,14 +26,25 @@ export class ZoomDialog extends Component {
 
   #highResImagesLoaded = /** @type {Set<string>} */ (new Set());
 
+  /** @type {number} Índice de la imagen actualmente visible (para ◄ ►). */
+  #activeIndex = 0;
+
+  /** @type {HTMLElement | null} Contenedor scrollable de la galería en escritorio. */
+  #gallery = null;
+
   connectedCallback() {
     super.connectedCallback();
     this.refs.dialog.addEventListener('scroll', this.handleScroll);
+    // En escritorio el scroll horizontal ocurre en la galería (no en el dialog),
+    // así que también escuchamos ahí para mantener el índice activo sincronizado.
+    this.#gallery = this.refs.dialog.querySelector('.dialog-zoomed-gallery');
+    this.#gallery?.addEventListener('scroll', this.handleScroll);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
     this.refs.dialog.removeEventListener('scroll', this.handleScroll);
+    this.#gallery?.removeEventListener('scroll', this.handleScroll);
   }
 
   /**
@@ -48,6 +59,7 @@ export class ZoomDialog extends Component {
     const { dialog, media, thumbnails } = this.refs;
     const targetImage = media[index];
     const targetThumbnail = thumbnails.children[index];
+    this.#activeIndex = index;
 
     const open = () => {
       dialog.showModal();
@@ -121,6 +133,7 @@ export class ZoomDialog extends Component {
 
     const mostVisibleElement = await getMostVisibleElement(media);
     const activeIndex = media.indexOf(mostVisibleElement);
+    this.#activeIndex = activeIndex;
     const targetThumbnail = thumbnails.children[activeIndex];
 
     if (!targetThumbnail || !(targetThumbnail instanceof HTMLElement)) return;
@@ -198,6 +211,20 @@ export class ZoomDialog extends Component {
   }
 
   /**
+   * Va a la imagen siguiente (botón ►).
+   */
+  next() {
+    this.selectThumbnail(this.#activeIndex + 1);
+  }
+
+  /**
+   * Va a la imagen anterior (botón ◄).
+   */
+  previous() {
+    this.selectThumbnail(this.#activeIndex - 1);
+  }
+
+  /**
    * Handles the click event of a thumbnail.
    * @param {number} index - The index of the thumbnail to select.
    */
@@ -228,6 +255,8 @@ export class ZoomDialog extends Component {
 
     // Guard if invalid
     if (isNaN(index) || index < 0 || index >= this.refs.thumbnails.children.length) return;
+
+    this.#activeIndex = index;
 
     const { media, thumbnails } = this.refs;
     const targetThumbnail = thumbnails.children[index];

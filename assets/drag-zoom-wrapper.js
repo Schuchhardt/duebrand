@@ -4,7 +4,9 @@ import { Component } from '@theme/component';
 
 const MIN_ZOOM = 1;
 const MAX_ZOOM = 5;
-const DEFAULT_ZOOM = 1.5;
+// Abrir el lightbox con la imagen ajustada a la pantalla (1x), como Impulse.
+// Antes era 1.5x, lo que abría la foto sobre-ampliada y pixelada.
+const DEFAULT_ZOOM = 1;
 const DOUBLE_TAP_DELAY = 300;
 const DOUBLE_TAP_DISTANCE = 50;
 const DRAG_THRESHOLD = 10;

@@ -542,10 +542,92 @@
         "padding-block-start": 48,
         "padding-block-end": 48
       }
+    },
+    "recently_viewed": {
+      "type": "recently-viewed",
+      "settings": {
+        "heading": "Vistos recientemente",
+        "max_products": 4
+      }
+    },
+    "testimonials_section": {
+      "type": "testimonials",
+      "settings": {
+        "heading": "Lo que dicen de nosotras",
+        "background": "#DCE2E6",
+        "padding_top": 72,
+        "padding_bottom": 72
+      },
+      "blocks": {
+        "testimonial_1": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "La calidad superó mis expectativas. El corte y la caída son impecables, se nota el diseño editorial.",
+            "name": "Camila R.",
+            "location": "Santiago, Chile"
+          }
+        },
+        "testimonial_2": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "Atención excelente y el envío llegó antes de lo esperado. Me sentí acompañada en toda la compra.",
+            "name": "Valentina P.",
+            "location": "Bogotá, Colombia"
+          }
+        },
+        "testimonial_3": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "Piezas atemporales que se ven mucho más caras de lo que cuestan. Mi nueva tienda favorita.",
+            "name": "Antonia M.",
+            "location": "Viña del Mar, Chile"
+          }
+        },
+        "testimonial_4": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "Me llegó tal cual las fotos, incluso mejor en persona. La tela es suave y de muy buena caída.",
+            "name": "Josefa T.",
+            "location": "Concepción, Chile"
+          }
+        },
+        "testimonial_5": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "Compré para un evento y recibí puros halagos. Volveré a comprar sin dudarlo.",
+            "name": "Daniela S.",
+            "location": "Medellín, Colombia"
+          }
+        },
+        "testimonial_6": {
+          "type": "testimonial",
+          "settings": {
+            "rating": 5,
+            "quote": "El proceso de compra fue simple y la atención por mensaje, impecable. Se nota el cariño en la marca.",
+            "name": "Fernanda L.",
+            "location": "Providencia, Chile"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial_1",
+        "testimonial_2",
+        "testimonial_3",
+        "testimonial_4",
+        "testimonial_5",
+        "testimonial_6"
+      ]
     }
   },
   "order": [
     "main",
-    "product_recommendations_qggXJq"
+    "product_recommendations_qggXJq",
+    "recently_viewed",
+    "testimonials_section"
   ]
 }

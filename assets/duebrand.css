@@ -465,11 +465,18 @@ html {
   overflow: hidden !important;
 }
 
-/* Botones de variante (Color / Talla): rectangulares con borde, estilo Impulse */
+/* Botones de variante (Color / Talla): redondeados tipo píldora para que
+   combinen con el botón ovalado de "Add to cart" y PayPal. */
 .product-information .variant-option__button-label,
 .product-information .variant-option label {
-  border-radius: 2px;
+  border-radius: 999px !important;
   letter-spacing: 0.08em;
+}
+
+/* Selector de cantidad: también redondeado (píldora) para mantener coherencia */
+.product-information .quantity-selector {
+  border-radius: 999px;
+  overflow: hidden;
 }
 
 /* Etiquetas Color / Talla: en mayúscula sutil como Impulse */
@@ -502,5 +509,136 @@ html {
 .product-information .accordion .details-content {
   padding-inline: 18px;
   padding-block-end: 16px;
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   LIGHTBOX / ZOOM de fotos en ESCRITORIO — igual que Impulse
+   El tema solo controlaba el lightbox en móvil; en escritorio apilaba todas
+   las fotos a ancho completo (gigantes). Aquí lo convertimos en un slideshow
+   horizontal: UNA foto por vista, ajustada a la pantalla, con botones ◄ ✕ ►
+   abajo al centro (sin miniaturas), tal como Impulse.
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* Evita el "parpadeo" al abrir: el tema dejaba el fondo del diálogo
+   transparente durante la transición y se veía la página por detrás.
+   Lo forzamos opaco para que la foto se agrande sobre fondo blanco limpio. */
+:root:active-view-transition .dialog-zoomed-gallery__dialog {
+  background-color: var(--color-background) !important;
+}
+
+::view-transition-group(gallery-item-open),
+::view-transition-group(gallery-item-close) {
+  animation-duration: 0.28s !important;
+}
+
+/* Botones ◄ ✕ ► (círculos blancos abajo al centro, estilo Impulse) */
+.zoom-controls {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 16px;
+  z-index: calc(var(--layer-overlay) + 2);
+}
+
+.zoom-controls__btn {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: #fff;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #1c1c1a;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.14);
+  transition: transform 0.15s ease;
+}
+
+.zoom-controls__btn:hover {
+  transform: scale(1.06);
+}
+
+.zoom-controls__btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* En móvil no hacen falta (se navega con swipe) */
+@media screen and (max-width: 749px) {
+  .zoom-controls {
+    display: none;
+  }
+}
+
+@media screen and (min-width: 750px) {
+  /* Diálogo = slideshow horizontal, una foto por pantalla */
+  .dialog-zoomed-gallery {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+    cursor: default;
+  }
+
+  .dialog-zoomed-gallery::-webkit-scrollbar {
+    display: none;
+  }
+
+  .dialog-zoomed-gallery .product-media-container {
+    flex: 0 0 100%;
+    width: 100%;
+    height: 100vh;
+    scroll-snap-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 0 104px; /* deja aire abajo para los botones */
+    box-sizing: border-box;
+  }
+
+  /* Cancelar el aspect-ratio/alto forzado y ajustar la foto a la pantalla */
+  .dialog-zoomed-gallery .product-media,
+  .dialog-zoomed-gallery .product-media__drag-zoom-wrapper {
+    aspect-ratio: auto !important;
+    height: auto !important;
+    max-height: 80vh;
+    width: auto;
+    max-width: 86vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: visible;
+  }
+
+  .dialog-zoomed-gallery .product-media__image,
+  .dialog-zoomed-gallery .product-media img {
+    width: auto !important;
+    height: auto !important;
+    max-width: 86vw;
+    max-height: 80vh;
+    object-fit: contain !important;
+    transform: none !important;
+  }
+
+  /* Ocultar la X de arriba (usamos los botones de abajo) */
+  .dialog-zoomed-gallery__close-button {
+    display: none !important;
+  }
+
+  /* Ocultar miniaturas laterales SIN display:none — el cierre espera a que
+     termine su animación de salida, y un elemento display:none no anima
+     (dejaba el cierre colgado ~2s con la foto achicada). Con opacity/
+     visibility la animación sí corre y el cierre queda fluido. */
+  .dialog-thumbnails-list-container {
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
 }
 

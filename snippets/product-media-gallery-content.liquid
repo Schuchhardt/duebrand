@@ -591,6 +591,21 @@
               </li>
             {%- endfor -%}
           </ul>
+          <div class="zoom-controls">
+            {%- if sorted_media.size > 1 -%}
+              <button type="button" class="zoom-controls__btn" aria-label="{{ 'general.slider.previous_slide' | t | default: 'Anterior' }}" on:click="/previous">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M15 5l-7 7 7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            {%- endif -%}
+            <button type="button" class="zoom-controls__btn zoom-controls__btn--close" aria-label="{{ 'actions.close' | t }}" on:click="/close">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" stroke-linecap="round"/></svg>
+            </button>
+            {%- if sorted_media.size > 1 -%}
+              <button type="button" class="zoom-controls__btn" aria-label="{{ 'general.slider.next_slide' | t | default: 'Siguiente' }}" on:click="/next">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+            {%- endif -%}
+          </div>
         </dialog>
       </zoom-dialog>
     {%- endif -%}
