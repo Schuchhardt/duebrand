@@ -643,9 +643,10 @@ html {
 }
 
 /* ─── Botón "ghost" tipo Impulse — banner "Enfoque en la sostenibilidad" ────
-   Scoped a esta sección hero para no afectar otros botones del sitio.
-   Si borras y vuelves a agregar la sección, actualiza el id del selector. */
-#shopify-section-hero_h39Wmm .button-custom {
+   Apunta a la clase propia del botón (button-custom--<id-del-bloque>).
+   La doble clase asegura que gane sobre el radio global del tema.
+   Si borras y vuelves a agregar ESE botón, actualiza el id del selector. */
+.button-custom.button-custom--button_LceGjB {
   border-radius: 100px;
   border-width: 1px;
   padding-block: 15px;

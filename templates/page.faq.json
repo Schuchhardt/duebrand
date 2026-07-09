@@ -1,0 +1,428 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "blocks": {
+        "title": {
+          "type": "text",
+          "name": "t:names.title",
+          "settings": {
+            "text": "<h1>{{ closest.page.title }}</h1>",
+            "width": "100%",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "h1",
+            "font": "var(--font-primary--family)",
+            "font_size": "",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "cat_shipping": {
+          "type": "text",
+          "name": "t:names.heading",
+          "settings": {
+            "text": "<h3>Pedidos y envíos</h3>",
+            "width": "100%",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "h3",
+            "font": "var(--font-primary--family)",
+            "font_size": "",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 24,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "acc_shipping": {
+          "type": "accordion",
+          "name": "t:names.accordion",
+          "settings": {
+            "icon": "caret",
+            "dividers": true,
+            "type_preset": "h6"
+          },
+          "blocks": {
+            "row_shipping_time": {
+              "type": "_accordion-row",
+              "settings": {
+                "heading": "¿Cuánto tarda el envío?",
+                "open_by_default": false,
+                "icon": "none"
+              },
+              "blocks": {
+                "text": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>El envío estándar tarda entre 3 y 7 días hábiles según tu ciudad. Los pedidos realizados antes de las 2:00 p. m. se despachan el mismo día.</p>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "rte"
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": ["text"]
+            },
+            "row_free_shipping": {
+              "type": "_accordion-row",
+              "settings": {
+                "heading": "¿Ofrecen envío gratis?",
+                "open_by_default": false,
+                "icon": "none"
+              },
+              "blocks": {
+                "text": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>Sí, ofrecemos envío gratis en compras sobre cierto monto. Verás el costo del envío antes de finalizar tu compra.</p>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "rte"
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": ["text"]
+            },
+            "row_change_order": {
+              "type": "_accordion-row",
+              "settings": {
+                "heading": "¿Puedo cambiar o cancelar mi pedido?",
+                "open_by_default": false,
+                "icon": "none"
+              },
+              "blocks": {
+                "text": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>Puedes modificar o cancelar tu pedido dentro de la primera hora después de la compra. Pasado ese tiempo, es posible que ya esté en preparación. Escríbenos lo antes posible y haremos lo posible por ayudarte.</p>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "rte"
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": ["text"]
+            },
+            "row_international": {
+              "type": "_accordion-row",
+              "settings": {
+                "heading": "¿Hacen envíos internacionales?",
+                "open_by_default": false,
+                "icon": "none"
+              },
+              "blocks": {
+                "text": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>Actualmente enviamos a Colombia y Chile. Las tarifas y tiempos de entrega varían según el destino y se calculan al finalizar la compra.</p>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "rte"
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": ["text"]
+            }
+          },
+          "block_order": [
+            "row_shipping_time",
+            "row_free_shipping",
+            "row_change_order",
+            "row_international"
+          ]
+        },
+        "cat_returns": {
+          "type": "text",
+          "name": "t:names.heading",
+          "settings": {
+            "text": "<h3>Devoluciones y cambios</h3>",
+            "width": "100%",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "h3",
+            "font": "var(--font-primary--family)",
+            "font_size": "",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 40,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "acc_returns": {
+          "type": "accordion",
+          "name": "t:names.accordion",
+          "settings": {
+            "icon": "caret",
+            "dividers": true,
+            "type_preset": "h6"
+          },
+          "blocks": {
+            "row_return_policy": {
+              "type": "_accordion-row",
+              "settings": {
+                "heading": "¿Cuál es su política de devoluciones?",
+                "open_by_default": false,
+                "icon": "none"
+              },
+              "blocks": {
+                "text": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>Aceptamos devoluciones dentro de los 30 días posteriores a la entrega. Las prendas deben estar sin uso, sin lavar y en su estado original con las etiquetas puestas.</p>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "rte"
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": ["text"]
+            },
+            "row_start_return": {
+              "type": "_accordion-row",
+              "settings": {
+                "heading": "¿Cómo inicio una devolución?",
+                "open_by_default": false,
+                "icon": "none"
+              },
+              "blocks": {
+                "text": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>Escríbenos a través de la página de Contacto con tu número de pedido y te enviaremos las instrucciones para realizar la devolución.</p>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "rte"
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": ["text"]
+            },
+            "row_exchange": {
+              "type": "_accordion-row",
+              "settings": {
+                "heading": "¿Puedo cambiar por otra talla o color?",
+                "open_by_default": false,
+                "icon": "none"
+              },
+              "blocks": {
+                "text": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>Sí, sujeto a disponibilidad de stock. Escríbenos y coordinamos el cambio por la talla o el color que prefieras.</p>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "rte"
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": ["text"]
+            },
+            "row_refund": {
+              "type": "_accordion-row",
+              "settings": {
+                "heading": "¿Cuándo recibiré mi reembolso?",
+                "open_by_default": false,
+                "icon": "none"
+              },
+              "blocks": {
+                "text": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>Una vez recibida y revisada la prenda, procesamos tu reembolso en un plazo de 5 a 10 días hábiles al mismo medio de pago que usaste en la compra.</p>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "rte"
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": ["text"]
+            }
+          },
+          "block_order": [
+            "row_return_policy",
+            "row_start_return",
+            "row_exchange",
+            "row_refund"
+          ]
+        },
+        "cat_sizing": {
+          "type": "text",
+          "name": "t:names.heading",
+          "settings": {
+            "text": "<h3>Tallas y ajuste</h3>",
+            "width": "100%",
+            "max_width": "normal",
+            "alignment": "left",
+            "type_preset": "h3",
+            "font": "var(--font-primary--family)",
+            "font_size": "",
+            "line_height": "normal",
+            "letter_spacing": "normal",
+            "case": "none",
+            "wrap": "pretty",
+            "background": false,
+            "background_color": "#00000026",
+            "corner_radius": 0,
+            "padding-block-start": 40,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {}
+        },
+        "acc_sizing": {
+          "type": "accordion",
+          "name": "t:names.accordion",
+          "settings": {
+            "icon": "caret",
+            "dividers": true,
+            "type_preset": "h6"
+          },
+          "blocks": {
+            "row_find_size": {
+              "type": "_accordion-row",
+              "settings": {
+                "heading": "¿Cómo encuentro mi talla?",
+                "open_by_default": false,
+                "icon": "none"
+              },
+              "blocks": {
+                "text": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>Cada producto incluye una guía de tallas en su página. Si tienes dudas, escríbenos y te asesoramos para que elijas la talla correcta.</p>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "rte"
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": ["text"]
+            },
+            "row_true_to_size": {
+              "type": "_accordion-row",
+              "settings": {
+                "heading": "¿Las prendas son fieles a la talla?",
+                "open_by_default": false,
+                "icon": "none"
+              },
+              "blocks": {
+                "text": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>La mayoría de nuestras prendas son fieles a la talla. En la descripción de cada producto indicamos si conviene elegir una talla más o menos.</p>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "rte"
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": ["text"]
+            },
+            "row_doesnt_fit": {
+              "type": "_accordion-row",
+              "settings": {
+                "heading": "¿Qué pasa si algo no me queda?",
+                "open_by_default": false,
+                "icon": "none"
+              },
+              "blocks": {
+                "text": {
+                  "type": "text",
+                  "settings": {
+                    "text": "<p>Puedes cambiarlo por otra talla dentro del plazo de devoluciones, sujeto a disponibilidad. Revisa nuestra política de devoluciones más arriba.</p>",
+                    "width": "100%",
+                    "max_width": "normal",
+                    "alignment": "left",
+                    "type_preset": "rte"
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": ["text"]
+            }
+          },
+          "block_order": [
+            "row_find_size",
+            "row_true_to_size",
+            "row_doesnt_fit"
+          ]
+        }
+      },
+      "block_order": [
+        "title",
+        "cat_shipping",
+        "acc_shipping",
+        "cat_returns",
+        "acc_returns",
+        "cat_sizing",
+        "acc_sizing"
+      ],
+      "settings": {
+        "content_direction": "column",
+        "gap": 16,
+        "padding-block-start": 40,
+        "padding-block-end": 80
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}
