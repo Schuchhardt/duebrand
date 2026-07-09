@@ -25,7 +25,7 @@
             "vertical_alignment_flex_direction_column": "flex-start",
             "gap": 11,
             "width": "custom",
-            "custom_width": 30,
+            "custom_width": 28,
             "width_mobile": "fill",
             "custom_width_mobile": 100,
             "height": "custom",
