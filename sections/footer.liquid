@@ -1,6 +1,10 @@
 {% liquid
+  assign skip_contrast = false
+  if section.settings.background_media == 'image' and section.settings.background_image != blank
+    assign skip_contrast = true
+  endif
   if section.settings.background_color != blank
-    render 'contrast-override', background_color: section.settings.background_color, section_id: section.id
+    render 'contrast-override', background_color: section.settings.background_color, section_id: section.id, skip_contrast: skip_contrast
   endif
 %}
 
@@ -10,6 +14,15 @@
 <div
   class="section section--{{ section.settings.section_width }}{% if section.settings.background_color != blank %} color-custom-{{ section.id }}{% endif %}"
 >
+  {% if section.settings.background_media == 'image' %}
+    <div class="custom-section-background">
+      {%- render 'background-media',
+        background_media: section.settings.background_media,
+        background_image: section.settings.background_image,
+        background_image_position: section.settings.background_image_position
+      -%}
+    </div>
+  {% endif %}
   {% liquid
     assign total_blocks = section.blocks.size
 
@@ -95,6 +108,21 @@
       grid-column: 1 / -1;
     }
   }
+  .section:has(.custom-section-background) {
+    position: relative;
+  }
+
+  .section .custom-section-background {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .section:has(.custom-section-background) .footer-content {
+    position: relative;
+    z-index: 1;
+  }
 {% endstylesheet %}
 
 {% schema %}
@@ -176,10 +204,50 @@
       "default": 0
     },
     {
+      "type": "select",
+      "id": "background_media",
+      "label": "t:settings.background_media",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:options.none"
+        },
+        {
+          "value": "image",
+          "label": "t:options.image"
+        }
+      ],
+      "default": "none"
+    },
+    {
       "type": "color",
       "id": "background_color",
       "label": "t:settings.background_color",
-      "default": "{{ settings.color_palette.foreground }}"
+      "default": "{{ settings.color_palette.foreground }}",
+      "visible_if": "{{ section.settings.background_media == 'none' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "t:settings.image",
+      "visible_if": "{{ section.settings.background_media == 'image' }}"
+    },
+    {
+      "type": "select",
+      "id": "background_image_position",
+      "label": "t:settings.image_position",
+      "options": [
+        {
+          "value": "cover",
+          "label": "t:options.cover"
+        },
+        {
+          "value": "fit",
+          "label": "t:options.fit"
+        }
+      ],
+      "default": "cover",
+      "visible_if": "{{ section.settings.background_media == 'image' }}"
     },
     {
       "type": "header",
