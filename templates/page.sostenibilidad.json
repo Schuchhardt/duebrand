@@ -313,8 +313,8 @@
         "media_position": "right",
         "media_width": "medium",
         "media_height": "60svh",
-        "section_width": "full-width",
-        "extend_media": true,
+        "section_width": "page-width",
+        "extend_media": false,
         "background_color": "",
         "padding-block-start": 48,
         "padding-block-end": 48
