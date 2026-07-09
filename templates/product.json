@@ -686,7 +686,7 @@
       "type": "recently-viewed",
       "settings": {
         "heading": "Vistos recientemente",
-        "max_products": 4
+        "max_products": 5
       }
     },
     "testimonials_section": {
