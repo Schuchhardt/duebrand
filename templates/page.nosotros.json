@@ -307,8 +307,8 @@
         "media_position": "left",
         "media_width": "medium",
         "media_height": "60svh",
-        "section_width": "full-width",
-        "extend_media": true,
+        "section_width": "page-width",
+        "extend_media": false,
         "background_color": "",
         "padding-block-start": 48,
         "padding-block-end": 48
@@ -446,8 +446,8 @@
         "media_position": "right",
         "media_width": "medium",
         "media_height": "60svh",
-        "section_width": "full-width",
-        "extend_media": true,
+        "section_width": "page-width",
+        "extend_media": false,
         "background_color": "",
         "padding-block-start": 48,
         "padding-block-end": 48
@@ -649,8 +649,8 @@
         "media_position": "left",
         "media_width": "medium",
         "media_height": "60svh",
-        "section_width": "full-width",
-        "extend_media": true,
+        "section_width": "page-width",
+        "extend_media": false,
         "background_color": "",
         "padding-block-start": 48,
         "padding-block-end": 48
@@ -913,7 +913,6 @@
             "image": {
               "type": "image",
               "settings": {
-                "image": "",
                 "link": "shopify://collections/all",
                 "image_ratio": "landscape",
                 "width": "fill",
@@ -1006,7 +1005,6 @@
             "image": {
               "type": "image",
               "settings": {
-                "image": "",
                 "link": "shopify://pages/encuentranos",
                 "image_ratio": "landscape",
                 "width": "fill",
