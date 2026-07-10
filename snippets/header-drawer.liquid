@@ -1421,4 +1421,40 @@
   .drawer-localization .language-selector .svg-wrapper.icon-caret svg {
     transform: none;
   }
+
+  /* ================================
+   * Menú móvil limpio y profesional (personalización Due Brand)
+   * ================================ */
+
+  /* Oculta imágenes, subenlaces y contenido destacado: solo categorías principales */
+  .menu-drawer__link-image,
+  .menu-drawer__menu--childlist,
+  .menu-drawer__featured-content,
+  .menu-drawer__featured-content--childlist {
+    display: none !important;
+  }
+
+  /* Ítems principales: letra moderada, elegante y uniforme */
+  .menu-drawer__menu-item--mainlist {
+    min-height: 0 !important;
+    font-size: 1.0625rem !important;
+    letter-spacing: 0.08em !important;
+    padding-block: var(--padding-md) !important;
+  }
+
+  /* Espaciado uniforme + divisores sutiles entre categorías */
+  .menu-drawer__menu.has-submenu > .menu-drawer__list-item {
+    min-height: 0 !important;
+    margin-block-end: 0 !important;
+    border-block-end: 1px solid var(--color-border);
+  }
+
+  .menu-drawer__menu.has-submenu > .menu-drawer__list-item:last-child {
+    border-block-end: none;
+  }
+
+  /* Quita el margen extra que traían las categorías con subenlaces */
+  .menu-drawer__menu .menu-drawer__list-item--flat {
+    margin-block-end: 0 !important;
+  }
 {% endstylesheet %}
