@@ -1102,7 +1102,7 @@
               "type": "text",
               "name": "t:names.text",
               "settings": {
-                "text": "<h3>Todo lo nuevo</h3>",
+                "text": "<h3>Colecciones</h3>",
                 "width": "fit-content",
                 "max_width": "normal",
                 "alignment": "left",
