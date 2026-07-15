@@ -82,8 +82,19 @@
     content_for 'block', type: '_header-logo', id: 'header-logo'
   endcapture
 
+  # Logo intercalado en medio del menú (Impulse). Sólo tiene sentido si logo y
+  # menú comparten la columna central; si no, se ignora.
+  assign logo_in_menu = false
+  if section.settings.logo_in_menu and section.settings.logo_position == 'center' and section.settings.menu_position == 'center'
+    assign logo_in_menu = true
+  endif
+
   capture menu
-    content_for 'block', type: '_header-menu', id: 'header-menu'
+    if logo_in_menu
+      content_for 'block', type: '_header-menu', id: 'header-menu', center_logo: logo
+    else
+      content_for 'block', type: '_header-menu', id: 'header-menu'
+    endif
   endcapture
 
   capture drawer_menu
@@ -191,6 +202,10 @@
 
   if collapse_header_paddings_class
     assign class = class | append: ' ' | append: collapse_header_paddings_class
+  endif
+
+  if logo_in_menu
+    assign class = class | append: ' header--logo-in-menu'
   endif
 
   # Determine transparent background value
@@ -367,41 +382,6 @@
   {%- if request.page_type == 'index' -%}
     <h1 class="visually-hidden">{{ shop.name }}</h1>
   {%- endif -%}
-
-  {%- comment -%} Barra de utilidad superior (estilo Impulse): enlaces + redes + país {%- endcomment -%}
-  <div class="header__row header__utility section section--full-width-margin section--{{ section.settings.section_width }}">
-    <div class="header__utility-inner">
-      <nav class="header__utility-links" aria-label="Utility">
-        {%- if linklists['utility-bar'].links.size > 0 -%}
-          {%- for link in linklists['utility-bar'].links -%}
-            <a href="{{ link.url }}">{{ link.title }}</a>
-          {%- endfor -%}
-        {%- else -%}
-          <a href="{{ routes.root_url }}">Sostenibilidad</a>
-          <a href="{{ routes.root_url }}">Cuidado de prendas</a>
-          <a href="{{ routes.root_url }}">Encuéntranos</a>
-        {%- endif -%}
-      </nav>
-      <div class="header__utility-right">
-        <div class="header__utility-social">
-          <a href="https://www.instagram.com/duebrand.cl/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5Zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7Zm5 3a5 5 0 1 1 0 10 5 5 0 0 1 0-10Zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm5.5-2.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/></svg></a>
-          <a href="https://www.facebook.com" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 22v-8h2.7l.4-3H13V9.1c0-.9.3-1.5 1.6-1.5H16V5c-.3 0-1.2-.1-2.3-.1-2.3 0-3.8 1.4-3.8 4v2.1H7.5v3H10v8h3Z"/></svg></a>
-          <a href="https://www.tiktok.com" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 3c.3 1.9 1.5 3.4 3.4 3.6v2.7c-1.1 0-2.2-.3-3.1-.8v5.6c0 2.9-2.3 5.2-5.2 5.2S5.9 17 5.9 14.1 8.2 8.9 11.1 8.9c.3 0 .5 0 .8.1v2.8c-.3-.1-.5-.1-.8-.1-1.4 0-2.4 1.1-2.4 2.4s1.1 2.4 2.4 2.4 2.5-1 2.5-2.4V3H16Z"/></svg></a>
-        </div>
-        {%- if localization.available_countries.size > 0 -%}
-          {% form 'localization', class: 'header__utility-loc' %}
-            <select name="country_code" class="header__utility-select" aria-label="País" onchange="this.form.submit()">
-              {%- for country in localization.available_countries -%}
-                <option value="{{ country.iso_code }}"{% if country.iso_code == localization.country.iso_code %} selected{% endif %}>{{ country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})</option>
-              {%- endfor -%}
-            </select>
-            <input type="hidden" name="return_to" value="{{ request.path }}">
-          {% endform %}
-        {%- endif -%}
-      </div>
-    </div>
-  </div>
-
   {% for row in rows %}
     {% liquid
       assign background = 'background_color_' | append: row
@@ -540,6 +520,31 @@
 
   #header-component[data-menu-style='drawer'] .header__column {
     display: contents;
+  }
+
+  /* Logo intercalado en medio del menú.
+     El logo dentro del menú vive en .header-menu, que ya es display:none bajo
+     750px, así que en móvil desaparece solo y queda el logo suelto de siempre.
+     Arriba de 750px pasa lo inverso: escondemos el suelto y mandamos el del
+     menú. Nunca hay dos visibles a la vez. */
+  .menu-list__logo-item {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    /* El gap del shadow list es 1rem; el logo necesita más aire a los lados. */
+    margin-inline: var(--gap-md, 1rem);
+  }
+
+  /* El :has() es una red de seguridad: sólo escondemos el logo suelto si el
+     logo del menú existe de verdad en el DOM. Si algún día deja de inyectarse,
+     reaparece el de siempre en vez de quedarnos sin logo. */
+  @media screen and (min-width: 750px) {
+    #header-component[data-menu-style='menu'].header--logo-in-menu
+      .header__columns:has(.menu-list__logo-item)
+      .header__column--center
+      > .header-logo {
+      display: none;
+    }
   }
 
   @media screen and (min-width: 750px) {
@@ -1240,6 +1245,14 @@
         }
       ],
       "default": "center"
+    },
+    {
+      "type": "checkbox",
+      "id": "logo_in_menu",
+      "label": "Logo en medio del menú",
+      "info": "Parte el menú en dos y deja el logo al centro (sólo escritorio). Requiere logo y menú centrados.",
+      "default": false,
+      "visible_if": "{{ section.settings.logo_position == 'center' and section.settings.menu_position == 'center' }}"
     },
     {
       "type": "header",

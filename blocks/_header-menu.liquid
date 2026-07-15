@@ -3,6 +3,7 @@
 
   @param {string} [variant] - What version of the menu to render. Defaults to header menu.
   @param {string} [transparent] - Show a transparent menu
+  @param {string} [center_logo] - Logo markup to insert in the middle of the menu, splitting it in two halves.
 {%- enddoc -%}
 
 {% liquid
@@ -91,6 +92,13 @@
     %}
 
     {% capture children %}
+      {% liquid
+        # Con 6 enlaces el logo queda tras el 3º (OFERTAS), partiendo el menú 3|3.
+        assign logo_after_index = 0
+        if center_logo != blank
+          assign logo_after_index = block_settings.menu.links.size | plus: 1 | divided_by: 2
+        endif
+      %}
       {% for link in block_settings.menu.links %}
         <li
           role="presentation"
@@ -146,6 +154,11 @@
             </div>
           {%- endif -%}
         </li>
+        {%- if logo_after_index > 0 and forloop.index == logo_after_index -%}
+          <li class="menu-list__logo-item" role="presentation">
+            {{ center_logo }}
+          </li>
+        {%- endif -%}
       {% endfor %}
       <li
         class="menu-list__list-item"

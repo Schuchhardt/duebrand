@@ -114,31 +114,98 @@
             "padding-inline-end": 0
           },
           "blocks": {
-            "text_pF6rVi": {
-              "type": "text",
-              "name": "Heading",
+            "group_join": {
+              "type": "group",
+              "name": "Únete a + logo",
               "settings": {
-                "text": "<h2>Únete a Duebrand</h2>",
-                "width": "100%",
-                "max_width": "normal",
-                "alignment": "left",
-                "type_preset": "h3",
-                "font": "var(--font-body--family)",
-                "font_size": "",
-                "line_height": "normal",
-                "letter_spacing": "normal",
-                "case": "none",
-                "wrap": "pretty",
-                "text_color": "",
-                "background": false,
-                "background_color": "#00000026",
-                "corner_radius": 0,
+                "content_direction": "row",
+                "vertical_on_mobile": false,
+                "horizontal_alignment": "flex-start",
+                "vertical_alignment": "center",
+                "align_baseline": false,
+                "horizontal_alignment_flex_direction_column": "flex-start",
+                "vertical_alignment_flex_direction_column": "center",
+                "gap": 10,
+                "width": "fit-content",
+                "custom_width": 100,
+                "width_mobile": "fit-content",
+                "custom_width_mobile": 100,
+                "height": "fit",
+                "custom_height": 100,
+                "background_media": "none",
+                "background_color": "",
+                "video_position": "cover",
+                "background_image_position": "cover",
+                "toggle_overlay": false,
+                "overlay_color": "#00000026",
+                "overlay_style": "solid",
+                "gradient_direction": "to top",
+                "border": "none",
+                "border_width": 1,
+                "border_opacity": 100,
+                "border_color": "",
+                "border_radius": 0,
+                "link": "",
+                "open_in_new_tab": false,
+                "placeholder": "",
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
               },
-              "blocks": {}
+              "blocks": {
+                "text_pF6rVi": {
+                  "type": "text",
+                  "name": "Heading",
+                  "settings": {
+                    "text": "<h2>Únete a</h2>",
+                    "width": "fit-content",
+                    "max_width": "none",
+                    "alignment": "left",
+                    "type_preset": "h3",
+                    "font": "var(--font-body--family)",
+                    "font_size": "",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "wrap": "pretty",
+                    "text_color": "",
+                    "background": false,
+                    "background_color": "#00000026",
+                    "corner_radius": 0,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                },
+                "logo_join": {
+                  "type": "logo",
+                  "name": "Logo Duebrand",
+                  "settings": {
+                    "inverse": false,
+                    "font": "heading",
+                    "text_color": "",
+                    "unit": "pixel",
+                    "pixel_height": 64,
+                    "percent_width": 100,
+                    "custom_mobile_size": true,
+                    "unit_mobile": "pixel",
+                    "percent_width_mobile": 100,
+                    "pixel_height_mobile": 48,
+                    "padding-block-start": 0,
+                    "padding-block-end": 0,
+                    "padding-inline-start": 0,
+                    "padding-inline-end": 0
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "text_pF6rVi",
+                "logo_join"
+              ]
             },
             "text_HafH7P": {
               "type": "text",
@@ -201,7 +268,7 @@
             }
           },
           "block_order": [
-            "text_pF6rVi",
+            "group_join",
             "text_HafH7P",
             "email-signup_HafH7P"
           ]
@@ -248,6 +315,11 @@
           },
           "blocks": {}
         },
+        "footer_localization": {
+          "type": "footer-localization",
+          "settings": {},
+          "blocks": {}
+        },
         "social_icons": {
           "type": "social-links",
           "settings": {
@@ -272,6 +344,7 @@
       "block_order": [
         "footer_copyright_CkeGUP",
         "policy_list",
+        "footer_localization",
         "social_icons"
       ],
       "settings": {
