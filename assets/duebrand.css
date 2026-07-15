@@ -287,9 +287,13 @@ html {
 }
 
 /* ─── Selector de país/moneda en el footer ──────────────────────────────── */
+/* El <span> marca el ancho real (se ajusta al texto) y el <select> va encima,
+   invisible pero clicable. Así la flecha queda pegada al texto en todos los
+   navegadores, sin depender de field-sizing: content. */
 .footer-localization {
+  position: relative;
   margin: 0;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   font-size: 0.75rem;
   letter-spacing: 0.08em;
@@ -298,23 +302,27 @@ html {
   color: var(--color-utilities, var(--color-foreground-muted));
 }
 
-.footer-localization::after {
-  content: '\25BE';
-  font-size: 0.85em;
-  margin-left: 5px;
+.footer-localization__display {
   pointer-events: none;
 }
 
+.footer-localization__display::after {
+  content: '\25BE';
+  font-size: 0.85em;
+  margin-left: 5px;
+}
+
 .footer-localization__select {
-  background: transparent;
-  border: none;
-  color: inherit;
-  font: inherit;
-  letter-spacing: inherit;
-  text-transform: inherit;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
   cursor: pointer;
+  border: none;
   padding: 0;
   margin: 0;
+  font: inherit;
   appearance: none;
   -webkit-appearance: none;
 }

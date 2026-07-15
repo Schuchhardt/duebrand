@@ -1,11 +1,20 @@
 {%- comment -%}
   Selector de país/moneda para el footer (Chile / Colombia).
   Reemplaza el que vivía en la barra superior del header.
+
+  El texto visible va en un <span> (que se ajusta al contenido) y el <select>
+  real va transparente encima. Un <select> se dimensiona según su opción más
+  ancha, así que mostrarlo directamente dejaba un hueco muerto a la derecha
+  del país corto y empujaba la flecha lejos del texto.
 {%- endcomment -%}
 
 {%- if localization.available_countries.size > 1 -%}
   <div {{ block.shopify_attributes }}>
     {%- form 'localization', class: 'footer-localization' -%}
+      {%- capture country_label -%}
+        {{- localization.country.name }} ({{ localization.country.currency.iso_code }} {{ localization.country.currency.symbol }})
+      {%- endcapture -%}
+      <span class="footer-localization__display" aria-hidden="true">{{ country_label | strip }}</span>
       <select
         name="country_code"
         class="footer-localization__select"
