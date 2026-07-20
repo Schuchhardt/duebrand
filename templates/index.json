@@ -13,8 +13,9 @@
       "type": "hero",
       "name": "t:names.hero",
       "settings": {
-        "media_type_1": "image",
+        "media_type_1": "video",
         "image_1": "shopify://shop_images/ChatGPT_Image_8_jul_2026_08_55_00_p.m..png",
+        "video_1": "shopify://files/videos/hf_20260720_194351_771620a0-4c31-4708-a797-8d30f95cfcc1.mp4",
         "media_type_2": "image",
         "stack_media_on_mobile": false,
         "custom_mobile_media": false,
