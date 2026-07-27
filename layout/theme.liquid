@@ -12,6 +12,29 @@
         type="image/png"
         href="{{ settings.favicon | image_url: width: 32, height: 32 }}"
       >
+    {%- else -%}
+      {% comment %}
+        Sin favicon propio en Ajustes del tema, usamos el isotipo sobre negro que
+        viene con el tema. Van dos tamaños porque el trazo del isotipo es muy fino
+        y los 32px están generados a mano para que no se apague en gris.
+      {% endcomment %}
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="32x32"
+        href="{{ 'db-favicon-32.png' | asset_url }}"
+      >
+      <link
+        rel="icon"
+        type="image/png"
+        sizes="48x48"
+        href="{{ 'db-favicon-48.png' | asset_url }}"
+      >
+      <link
+        rel="apple-touch-icon"
+        sizes="180x180"
+        href="{{ 'db-favicon-180.png' | asset_url }}"
+      >
     {%- endif -%}
 
     {% comment %} This a way to wait for main content to load when navigating to a new page so that the view transitions can work consistently {% endcomment %}
@@ -35,6 +58,21 @@
     {%- render 'scripts' -%}
     {%- render 'theme-styles-variables' -%}
     {%- render 'color-palette' -%}
+
+    {%- comment -%}
+      URLs de los archivos de marca, expuestas como variables CSS. Los bloques
+      {% stylesheet %} de secciones y snippets no procesan Liquid, así que no
+      pueden llamar a asset_url; con esto sí pueden usar los logos como máscara.
+      Al pintarse como máscara sobre currentColor, el isotipo toma el color del
+      texto y funciona igual sobre fondo claro que oscuro.
+    {%- endcomment -%}
+    {% style %}
+      :root {
+        --db-isotype-url: url('{{ 'db-isotipo.png' | asset_url }}');
+        --db-logo-vertical-url: url('{{ 'db-logo-vertical.png' | asset_url }}');
+        --db-logo-horizontal-url: url('{{ 'db-logo-horizontal.png' | asset_url }}');
+      }
+    {% endstyle %}
 
     {% if request.design_mode %}
       {%- render 'theme-editor' -%}

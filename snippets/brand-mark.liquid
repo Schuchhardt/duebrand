@@ -1,0 +1,58 @@
+{%- doc -%}
+  Marca decorativa de Due Brand (isotipo o logo) pintada como máscara CSS sobre
+  currentColor. A diferencia de 'brand-logo-image', que sirve para el logo real
+  con su link y su alt, esto es puro adorno: toma el color del texto de alrededor,
+  así que funciona igual sobre fondo claro que sobre fondo oscuro y no hay que
+  mantener dos archivos por sitio.
+
+  @param {string} [variant] - isotype (por defecto) | vertical | horizontal
+  @param {string} [class] - Clases extra
+  @param {string} [style] - Estilos inline extra, típicamente para fijar el alto
+
+  @example
+  {% render 'brand-mark', variant: 'isotype', style: '--brand-mark-height: 40px;' %}
+{%- enddoc -%}
+
+{%- liquid
+  case variant
+    when 'vertical'
+      assign mark_url = 'var(--db-logo-vertical-url)'
+      assign mark_ratio = 2.09
+    when 'horizontal'
+      assign mark_url = 'var(--db-logo-horizontal-url)'
+      assign mark_ratio = 5.37
+    else
+      assign mark_url = 'var(--db-isotype-url)'
+      assign mark_ratio = 0.9
+  endcase
+-%}
+
+<span
+  class="brand-mark {{ class }}"
+  aria-hidden="true"
+  style="--brand-mark-url: {{ mark_url }}; --brand-mark-ratio: {{ mark_ratio }}; {{ style }}"
+></span>
+
+{% stylesheet %}
+  .brand-mark {
+    display: block;
+    height: var(--brand-mark-height, 40px);
+    aspect-ratio: var(--brand-mark-ratio);
+    background-color: currentcolor;
+    opacity: var(--brand-mark-opacity, 1);
+    flex-shrink: 0;
+
+    /* stylelint-disable-next-line property-no-vendor-prefix */
+    -webkit-mask-image: var(--brand-mark-url);
+    mask-image: var(--brand-mark-url);
+    /* stylelint-disable-next-line property-no-vendor-prefix */
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    /* stylelint-disable-next-line property-no-vendor-prefix */
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    /* stylelint-disable-next-line property-no-vendor-prefix */
+    -webkit-mask-position: center;
+    mask-position: center;
+  }
+{% endstylesheet %}

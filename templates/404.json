@@ -12,6 +12,19 @@
     "main": {
       "type": "main-404",
       "blocks": {
+        "brand_mark_404": {
+          "type": "brand-mark",
+          "name": "Marca Due Brand",
+          "settings": {
+            "variant": "isotype",
+            "height": 64,
+            "opacity": 25,
+            "alignment": "center",
+            "padding-block-start": 0,
+            "padding-block-end": 8
+          },
+          "blocks": {}
+        },
         "text_GqmVFf": {
           "type": "text",
           "name": "t:names.text",
@@ -79,6 +92,7 @@
         }
       },
       "block_order": [
+        "brand_mark_404",
         "text_GqmVFf",
         "text_Ua9XAW",
         "button_PAQMwR"

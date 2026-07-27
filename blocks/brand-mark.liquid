@@ -1,0 +1,129 @@
+{% liquid
+  assign block_settings = block.settings
+  assign height = block_settings.height | default: 40
+  assign opacity = block_settings.opacity | default: 100 | divided_by: 100.0
+%}
+
+<div
+  class="brand-mark-block spacing-style"
+  style="
+    {% render 'spacing-style', settings: block_settings %}
+    --brand-mark-block-alignment: {{ block_settings.alignment }};
+  "
+  {{ block.shopify_attributes }}
+>
+  {% capture mark_style %}--brand-mark-height: {{ height }}px; --brand-mark-opacity: {{ opacity }};{% endcapture %}
+  {% render 'brand-mark', variant: block_settings.variant, style: mark_style %}
+</div>
+
+{% stylesheet %}
+  .brand-mark-block {
+    display: flex;
+    width: 100%;
+    justify-content: var(--brand-mark-block-alignment, center);
+    color: var(--color-foreground);
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Marca Due Brand",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "variant",
+      "label": "Versión",
+      "options": [
+        {
+          "value": "isotype",
+          "label": "Sólo isotipo"
+        },
+        {
+          "value": "vertical",
+          "label": "Marca vertical"
+        },
+        {
+          "value": "horizontal",
+          "label": "Marca horizontal"
+        }
+      ],
+      "default": "isotype"
+    },
+    {
+      "type": "paragraph",
+      "content": "Toma el color del texto de la sección, así que funciona igual sobre fondo claro que oscuro."
+    },
+    {
+      "type": "range",
+      "id": "height",
+      "label": "Alto",
+      "min": 12,
+      "max": 200,
+      "step": 2,
+      "unit": "px",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "opacity",
+      "label": "Opacidad",
+      "min": 5,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 100
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": "t:settings.alignment",
+      "options": [
+        {
+          "value": "flex-start",
+          "label": "t:options.left"
+        },
+        {
+          "value": "center",
+          "label": "t:options.center"
+        },
+        {
+          "value": "flex-end",
+          "label": "t:options.right"
+        }
+      ],
+      "default": "center"
+    },
+    {
+      "type": "header",
+      "content": "t:content.padding"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:settings.top",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:settings.bottom",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "Marca Due Brand",
+      "category": "t:categories.basic"
+    }
+  ]
+}
+{% endschema %}

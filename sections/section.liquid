@@ -259,6 +259,53 @@
       "visible_if": "{{ section.settings.background_media == 'none' }}"
     },
     {
+      "type": "select",
+      "id": "brand_watermark",
+      "label": "Marca de agua",
+      "info": "Logo gigante y tenue detrás del contenido. Toma el color del texto de la sección.",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:options.none"
+        },
+        {
+          "value": "isotype",
+          "label": "Sólo isotipo"
+        },
+        {
+          "value": "vertical",
+          "label": "Marca vertical"
+        },
+        {
+          "value": "horizontal",
+          "label": "Marca horizontal"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "type": "range",
+      "id": "brand_watermark_size",
+      "label": "Tamaño de la marca de agua",
+      "min": 80,
+      "max": 600,
+      "step": 20,
+      "unit": "px",
+      "default": 260,
+      "visible_if": "{{ section.settings.brand_watermark != 'none' }}"
+    },
+    {
+      "type": "range",
+      "id": "brand_watermark_opacity",
+      "label": "Opacidad de la marca de agua",
+      "min": 2,
+      "max": 30,
+      "step": 1,
+      "unit": "%",
+      "default": 8,
+      "visible_if": "{{ section.settings.brand_watermark != 'none' }}"
+    },
+    {
       "type": "video",
       "id": "video",
       "label": "t:settings.video",

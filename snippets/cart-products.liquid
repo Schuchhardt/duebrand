@@ -53,6 +53,16 @@
   "
 >
   {% if cart.empty? or force_empty %}
+    {%- comment -%}
+      Isotipo tenue: sin esto el carrito vacío es sólo un botón suelto y parece
+      que la página no cargó.
+    {%- endcomment -%}
+    {% render 'brand-mark',
+      variant: 'isotype',
+      class: 'cart-items__empty-mark',
+      style: '--brand-mark-height: 56px; --brand-mark-opacity: 0.18;'
+    %}
+
     {%- if shop.customer_accounts_enabled and customer == null -%}
       <p>
         {{ 'actions.log_in_html' | t: link: routes.account_login_url }}
@@ -720,6 +730,12 @@
     object-position: center center;
     width: 100%;
     height: auto;
+  }
+
+  .cart-items__empty-mark {
+    margin-inline: auto;
+    margin-block-end: var(--margin-md);
+    color: var(--color-foreground);
   }
 
   .cart-items__empty-button {

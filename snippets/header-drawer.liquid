@@ -89,6 +89,16 @@
           {{- 'icon-close.svg' | inline_asset_content -}}
         </span>
       </button>
+      {%- if block_settings.drawer_show_isotype != false -%}
+        {%- comment -%} Isotipo de marca arriba del menú móvil. {%- endcomment -%}
+        <a
+          href="{{ routes.root_url }}"
+          class="menu-drawer__brand"
+          aria-label="{{ 'accessibility.home_logo_alt' | t: store_name: shop.name }}"
+        >
+          {% render 'brand-mark', variant: 'isotype', style: '--brand-mark-height: 44px;' %}
+        </a>
+      {%- endif -%}
       <nav
         class="menu-drawer__navigation"
         style="
@@ -1168,6 +1178,22 @@
     height: fit-content;
     color: inherit;
     padding: var(--padding-lg);
+  }
+
+  /* Isotipo de marca arriba del menú móvil. Se sube sobre la fila del botón de
+     cerrar para no robarle alto útil al menú. */
+  .menu-drawer__brand {
+    display: flex;
+    justify-content: center;
+    padding-inline: var(--padding-lg);
+    padding-block-end: var(--padding-md);
+    margin-block-start: calc(-1 * var(--padding-lg));
+    color: var(--color-foreground);
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: none;
+    }
   }
 
   .menu-drawer__back-button {

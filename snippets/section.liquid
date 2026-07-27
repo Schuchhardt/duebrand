@@ -52,6 +52,21 @@
     %}
   </div>
 
+  {%- if section.settings.brand_watermark != blank and section.settings.brand_watermark != 'none' -%}
+    {%- comment -%}
+      Marca de agua: isotipo gigante y tenue detrás del contenido. Va como hijo
+      directo de .section, que ya es position: relative, y queda por debajo de
+      .custom-section-content, que lleva z-index.
+    {%- endcomment -%}
+    {% capture watermark_style %}
+      --brand-mark-height: {{ section.settings.brand_watermark_size | default: 260 }}px;
+      --brand-mark-opacity: {{ section.settings.brand_watermark_opacity | default: 8 | divided_by: 100.0 }};
+    {% endcapture %}
+    <div class="section-watermark">
+      {% render 'brand-mark', variant: section.settings.brand_watermark, style: watermark_style %}
+    </div>
+  {%- endif -%}
+
   <div
     class="border-style custom-section-content"
     style="{% render 'border-override', settings: section.settings %}"
@@ -107,5 +122,23 @@
 
   .custom-section-content {
     z-index: var(--layer-flat);
+  }
+
+  .section-watermark {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    overflow: hidden;
+    color: var(--color-foreground);
+
+    /* La marca de agua nunca debe empujar el alto de la sección ni desbordar
+       en móvil, donde el ancho es mucho menor que el alto elegido. */
+    & .brand-mark {
+      max-width: 70%;
+      max-height: 80%;
+    }
   }
 {% endstylesheet %}
