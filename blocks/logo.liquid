@@ -1,13 +1,53 @@
 {% liquid
   assign block_settings = block.settings
-  assign image = settings.logo
 
-  if block_settings.inverse and settings.logo_inverse
-    assign image = settings.logo_inverse
+  # Origen del logo: los archivos de marca que vienen con el tema (por defecto),
+  # una imagen propia de este bloque, o la imagen de Ajustes del tema > Marca.
+  assign logo_source = block_settings.logo_source | default: 'vertical'
+
+  assign brand_asset = ''
+  assign brand_ratio = 0
+  case logo_source
+    when 'vertical'
+      assign brand_asset = 'db-logo-vertical'
+      assign brand_ratio = 2.09
+    when 'horizontal'
+      assign brand_asset = 'db-logo-horizontal'
+      assign brand_ratio = 5.37
+    when 'isotype'
+      assign brand_asset = 'db-isotipo'
+      assign brand_ratio = 0.9
+  endcase
+
+  if logo_source == 'custom'
+    assign image = block_settings.custom_logo
+  elsif logo_source == 'theme'
+    assign image = settings.logo
+    if block_settings.inverse and settings.logo_inverse
+      assign image = settings.logo_inverse
+    endif
+  endif
+
+  # Proporción ancho/alto de lo que finalmente se pinta, para calcular --logo-width.
+  assign logo_ratio = 0
+  if brand_asset != blank
+    assign logo_ratio = brand_ratio
+  elsif image
+    assign logo_ratio = image.width | times: 1.00 | divided_by: image.height
   endif
 %}
 
-{%- if image -%}
+{%- if brand_asset != blank -%}
+  {% capture logo_image %}
+    {% render 'brand-logo-image',
+      asset: brand_asset,
+      ratio: brand_ratio,
+      height: block_settings.pixel_height,
+      class: 'logo-block__image',
+      white: block_settings.inverse
+    %}
+  {% endcapture %}
+{%- elsif image -%}
   {% capture logo_image %}
     {{-
       image
@@ -32,8 +72,8 @@
     {% if block_settings.unit == 'percent' %}
       --logo-width: {{ block_settings.percent_width }}%;
     {% else %}
-      {% if image %}
-        --logo-width: {{ image.width | times: 1.00 | divided_by: image.height | times: block_settings.pixel_height }}px;
+      {% if logo_ratio > 0 %}
+        --logo-width: {{ logo_ratio | times: block_settings.pixel_height }}px;
       {% else %}
         --logo-width: {{ shop.name.size | times: 0.65 }}em;
         --logo-height: {{ block_settings.pixel_height }}px;
@@ -45,8 +85,8 @@
         --logo-width-mobile: {{ block_settings.percent_width_mobile }}%;
         --logo-height-mobile: auto;
       {% else %}
-        {% if image %}
-          --logo-width-mobile: {{ image.width | times: 1.00 | divided_by: image.height | times: block_settings.pixel_height_mobile }}px;
+        {% if logo_ratio > 0 %}
+          --logo-width-mobile: {{ logo_ratio | times: block_settings.pixel_height_mobile }}px;
           {% else %}
             --logo-width-mobile: {{ shop.name.size | times: 0.65 }}em;
             --logo-height-mobile: {{ block_settings.pixel_height_mobile }}px;
@@ -104,11 +144,47 @@
   "tag": null,
   "settings": [
     {
+      "type": "select",
+      "id": "logo_source",
+      "label": "Logo",
+      "options": [
+        {
+          "value": "vertical",
+          "label": "Marca vertical (isotipo + DUEBRAND)"
+        },
+        {
+          "value": "horizontal",
+          "label": "Marca horizontal (DUE ⊙ BRAND)"
+        },
+        {
+          "value": "isotype",
+          "label": "Sólo isotipo"
+        },
+        {
+          "value": "custom",
+          "label": "Imagen personalizada"
+        },
+        {
+          "value": "theme",
+          "label": "La de Ajustes del tema > Marca"
+        }
+      ],
+      "default": "vertical",
+      "info": "Las tres primeras opciones usan los archivos oficiales que vienen con el tema."
+    },
+    {
+      "type": "image_picker",
+      "id": "custom_logo",
+      "label": "Imagen del logo",
+      "visible_if": "{{ block.settings.logo_source == 'custom' }}"
+    },
+    {
       "type": "checkbox",
-      "label": "t:settings.use_inverse_logo",
+      "label": "Versión para fondo oscuro",
       "id": "inverse",
       "default": false,
-      "visible_if": "{{ settings.logo_inverse }}"
+      "info": "Pinta el logo en blanco. Con la opción “Ajustes del tema” usa el logo inverso configurado ahí.",
+      "visible_if": "{{ block.settings.logo_source != 'custom' }}"
     },
     {
       "type": "select",
@@ -133,17 +209,18 @@
         }
       ],
       "default": "heading",
-      "visible_if": "{{ settings.logo == blank and settings.logo_inverse == blank or block.settings.inverse == false }}"
+      "visible_if": "{{ block.settings.logo_source == 'theme' and settings.logo == blank and settings.logo_inverse == blank or block.settings.logo_source == 'custom' and block.settings.custom_logo == blank }}"
     },
     {
       "type": "color",
       "id": "text_color",
       "label": "t:settings.color",
-      "visible_if": "{{ settings.logo == blank and settings.logo_inverse == blank or block.settings.inverse == false }}"
+      "visible_if": "{{ block.settings.logo_source == 'theme' and settings.logo == blank and settings.logo_inverse == blank or block.settings.logo_source == 'custom' and block.settings.custom_logo == blank }}"
     },
     {
       "type": "paragraph",
-      "content": "t:content.edit_logo_in_theme_settings"
+      "content": "t:content.edit_logo_in_theme_settings",
+      "visible_if": "{{ block.settings.logo_source == 'theme' }}"
     },
     {
       "type": "header",

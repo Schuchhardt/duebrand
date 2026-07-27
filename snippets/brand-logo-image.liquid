@@ -1,0 +1,42 @@
+{%- doc -%}
+  Renderiza uno de los archivos de logo de Due Brand que vienen dentro del tema
+  (assets/db-*.png). Se usa cuando el bloque de logo no apunta a una imagen de
+  Ajustes del tema ni a una imagen propia.
+
+  @param {string} asset - Nombre base del archivo, sin extensión ni sufijo de color (ej. 'db-logo-vertical')
+  @param {number} ratio - Proporción ancho/alto del archivo, para reservar el espacio y evitar saltos de layout
+  @param {number} height - Alto de render en px
+  @param {string} [class] - Clases extra
+  @param {string} [alt] - Texto alternativo
+  @param {string} [style] - Estilos inline extra
+  @param {boolean} [white] - Usa la variante blanca, para fondos oscuros
+
+  @example
+  {% render 'brand-logo-image', asset: 'db-isotipo', ratio: 0.9, height: 60 %}
+{%- enddoc -%}
+
+{%- liquid
+  assign file = asset
+  if white
+    assign file = file | append: '-blanco'
+  endif
+  assign file = file | append: '.png'
+
+  # Sólo se usan para fijar la proporción del hueco; el tamaño real lo pone el CSS.
+  assign render_height = height | default: 100
+  assign render_width = render_height | times: ratio | ceil
+-%}
+
+<img
+  src="{{ file | asset_url }}"
+  alt="{{ alt | default: shop.name | escape }}"
+  width="{{ render_width }}"
+  height="{{ render_height }}"
+  loading="eager"
+  {% if class != blank %}
+    class="{{ class }}"
+  {% endif %}
+  {% if style != blank %}
+    style="{{ style }}"
+  {% endif %}
+>

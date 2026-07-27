@@ -89,9 +89,17 @@
     assign logo_in_menu = true
   endif
 
+  # Copia sin atributos del editor: con el logo intercalado hay dos logos en el
+  # DOM (el suelto para móvil y éste para escritorio) y si los dos llevan el id
+  # de bloque el editor no sabe cuál seleccionar, así que el logo deja de ser
+  # editable. El que manda es siempre el suelto.
+  capture logo_for_menu
+    content_for 'block', type: '_header-logo', id: 'header-logo', skip_editor_attributes: true
+  endcapture
+
   capture menu
     if logo_in_menu
-      content_for 'block', type: '_header-menu', id: 'header-menu', center_logo: logo
+      content_for 'block', type: '_header-menu', id: 'header-menu', center_logo: logo_for_menu
     else
       content_for 'block', type: '_header-menu', id: 'header-menu'
     endif
@@ -331,6 +339,9 @@
     "name": {{ shop.name | json }},
     {% if settings.logo %}
       "logo": {{ settings.logo | image_url: width: 500 | prepend: "https:" | json }},
+    {% else %}
+      {% comment %} Sin logo en Ajustes del tema, usamos el archivo de marca del tema. {% endcomment %}
+      "logo": {{ 'db-logo-vertical.png' | asset_url | prepend: "https:" | json }},
     {% endif %}
     "url": {{ request.origin | append: page.url | json }}
   }

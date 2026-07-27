@@ -1,3 +1,12 @@
+{%- doc -%}
+  Logo del header.
+
+  @param {boolean} [skip_editor_attributes] - Omite los atributos del editor de temas.
+    El logo se renderiza dos veces cuando está intercalado en el menú (uno suelto
+    para móvil y otro dentro del menú para escritorio); si los dos llevan el id de
+    bloque, el editor no sabe cuál seleccionar y el logo deja de ser clickeable.
+{%- enddoc -%}
+
 {% liquid
   assign block_settings = block.settings
   assign use_inverse_logo = false
@@ -10,11 +19,33 @@
     assign use_inverse_logo = true
   endif
 
-  if use_inverse_logo
-    if settings.logo_inverse != blank
-      assign inverse_logo = settings.logo_inverse
-    else
-      assign inverse_logo = settings.logo
+  # Origen del logo: los archivos de marca que vienen con el tema (por defecto),
+  # una imagen propia de este bloque, o la imagen de Ajustes del tema > Marca.
+  assign logo_source = block_settings.logo_source | default: 'vertical'
+
+  assign brand_asset = ''
+  assign brand_ratio = 0
+  case logo_source
+    when 'vertical'
+      assign brand_asset = 'db-logo-vertical'
+      assign brand_ratio = 2.09
+    when 'horizontal'
+      assign brand_asset = 'db-logo-horizontal'
+      assign brand_ratio = 5.37
+    when 'isotype'
+      assign brand_asset = 'db-isotipo'
+      assign brand_ratio = 0.9
+  endcase
+
+  if logo_source == 'custom'
+    assign logo_image = block_settings.custom_logo
+    if use_inverse_logo
+      assign inverse_logo = block_settings.custom_logo_inverse | default: block_settings.custom_logo
+    endif
+  elsif logo_source == 'theme'
+    assign logo_image = settings.logo
+    if use_inverse_logo
+      assign inverse_logo = settings.logo_inverse | default: settings.logo
     endif
   endif
 
@@ -38,13 +69,23 @@
     --font-style: var(--font-body--style);
     --font-weight: 600;
   "
-  {{ block.shopify_attributes }}
+  {% unless skip_editor_attributes %}
+    {{ block.shopify_attributes }}
+  {% endunless %}
 >
   {% liquid
-    assign logo_width = settings.logo_height | times: settings.logo.aspect_ratio | ceil
-    assign logo_width_mobile = settings.logo_height_mobile | times: settings.logo.aspect_ratio | ceil
-    assign inverse_logo_width = settings.logo_height | times: inverse_logo.aspect_ratio | ceil
-    assign inverse_logo_width_mobile = settings.logo_height_mobile | times: inverse_logo.aspect_ratio | ceil
+    if brand_asset != blank
+      assign ratio = brand_ratio
+      assign inverse_ratio = brand_ratio
+    else
+      assign ratio = logo_image.aspect_ratio
+      assign inverse_ratio = inverse_logo.aspect_ratio
+    endif
+
+    assign logo_width = settings.logo_height | times: ratio | ceil
+    assign logo_width_mobile = settings.logo_height_mobile | times: ratio | ceil
+    assign inverse_logo_width = settings.logo_height | times: inverse_ratio | ceil
+    assign inverse_logo_width_mobile = settings.logo_height_mobile | times: inverse_ratio | ceil
     assign logo_style = '--header-logo-image-width: ' | append: logo_width | append: 'px;' | append: '--header-logo-image-width-mobile: ' | append: logo_width_mobile | append: 'px; --header-logo-image-height: ' | append: settings.logo_height | append: 'px; --header-logo-image-height-mobile: ' | append: settings.logo_height_mobile | append: 'px;'
     assign inverse_logo_style = '--header-logo-image-width: ' | append: inverse_logo_width | append: 'px;' | append: '--header-logo-image-width-mobile: ' | append: inverse_logo_width_mobile | append: 'px; --header-logo-image-height: ' | append: settings.logo_height | append: 'px; --header-logo-image-height-mobile: ' | append: settings.logo_height_mobile | append: 'px;'
   %}
@@ -53,14 +94,25 @@
     class="header-logo__image-container header-logo__image-container--original"
     data-testid="header-logo"
   >
-    {% render 'image',
-      image: settings.logo,
-      class: 'header-logo__image',
-      height: settings.logo_height,
-      alt_text_fallback: alt_text_fallback,
-      text_fallback: shop.name,
-      style: logo_style
-    %}
+    {% if brand_asset != blank %}
+      {% render 'brand-logo-image',
+        asset: brand_asset,
+        ratio: brand_ratio,
+        height: settings.logo_height,
+        class: 'header-logo__image',
+        alt: alt_text_fallback,
+        style: logo_style
+      %}
+    {% else %}
+      {% render 'image',
+        image: logo_image,
+        class: 'header-logo__image',
+        height: settings.logo_height,
+        alt_text_fallback: alt_text_fallback,
+        text_fallback: shop.name,
+        style: logo_style
+      %}
+    {% endif %}
   </span>
 
   {% if use_inverse_logo %}
@@ -68,14 +120,26 @@
       class="header-logo__image-container header-logo__image-container--inverse"
       data-testid="header-logo-inverse"
     >
-      {% render 'image',
-        image: inverse_logo,
-        class: 'header-logo__image',
-        height: settings.logo_height,
-        alt_text_fallback: alt_text_fallback,
-        text_fallback: shop.name,
-        style: inverse_logo_style
-      %}
+      {% if brand_asset != blank %}
+        {% render 'brand-logo-image',
+          asset: brand_asset,
+          ratio: brand_ratio,
+          height: settings.logo_height,
+          class: 'header-logo__image',
+          alt: alt_text_fallback,
+          style: inverse_logo_style,
+          white: true
+        %}
+      {% else %}
+        {% render 'image',
+          image: inverse_logo,
+          class: 'header-logo__image',
+          height: settings.logo_height,
+          alt_text_fallback: alt_text_fallback,
+          text_fallback: shop.name,
+          style: inverse_logo_style
+        %}
+      {% endif %}
     </span>
   {% endif %}
 </a>
@@ -145,8 +209,50 @@
   "class": "header-logo",
   "settings": [
     {
+      "type": "select",
+      "id": "logo_source",
+      "label": "Logo",
+      "options": [
+        {
+          "value": "vertical",
+          "label": "Marca vertical (isotipo + DUEBRAND)"
+        },
+        {
+          "value": "horizontal",
+          "label": "Marca horizontal (DUE ⊙ BRAND)"
+        },
+        {
+          "value": "isotype",
+          "label": "Sólo isotipo"
+        },
+        {
+          "value": "custom",
+          "label": "Imagen personalizada"
+        },
+        {
+          "value": "theme",
+          "label": "La de Ajustes del tema > Marca"
+        }
+      ],
+      "default": "vertical",
+      "info": "Las tres primeras opciones usan los archivos oficiales que vienen con el tema."
+    },
+    {
+      "type": "image_picker",
+      "id": "custom_logo",
+      "label": "Imagen del logo",
+      "visible_if": "{{ block.settings.logo_source == 'custom' }}"
+    },
+    {
+      "type": "image_picker",
+      "id": "custom_logo_inverse",
+      "label": "Imagen del logo sobre fondo oscuro",
+      "info": "Se usa sólo cuando el header es transparente. Si la dejas vacía se reutiliza la imagen de arriba.",
+      "visible_if": "{{ block.settings.logo_source == 'custom' }}"
+    },
+    {
       "type": "paragraph",
-      "content": "t:content.edit_logo_in_theme_settings"
+      "content": "El tamaño del logo se ajusta en Ajustes del tema > Marca (alto del logo)."
     },
     {
       "type": "header",
