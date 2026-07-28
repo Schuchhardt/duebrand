@@ -50,6 +50,7 @@
           "type": "_header-logo",
           "static": true,
           "settings": {
+            "logo_source": "vertical",
             "hide_logo_on_home_page": false,
             "padding-block-start": 0,
             "padding-block-end": 0
@@ -74,6 +75,7 @@
             "navigation_bar": false,
             "background_color_navigation_bar": "{{ settings.color_palette.background }}",
             "text_color_navigation_bar": "",
+            "drawer_show_isotype": true,
             "drawer_accordion": false,
             "drawer_accordion_expand_first": false,
             "drawer_dividers": false
