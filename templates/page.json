@@ -69,7 +69,7 @@
             "placement": "on_image",
             "horizontal_alignment": "flex-start",
             "vertical_alignment": "flex-start",
-            "collection_card_gap": 0,
+            "collection_card_gap": 50,
             "background_color": "",
             "border": "none",
             "border_width": 1,
