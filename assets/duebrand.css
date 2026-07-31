@@ -347,6 +347,24 @@ html {
   min-width: 0;
 }
 
+/* El ancho de cada columna se calcula en sections/footer.liquid y llega en
+   --grid-template-*. La regla se repite acá, con más especificidad para que
+   gane sin depender del orden de carga, porque el CSS que va dentro del
+   {% stylesheet %} de la sección puede llegar desactualizado a producción: en
+   ese caso el footer cae en cinco columnas iguales y se corta el campo de
+   correo. */
+@media screen and (min-width: 750px) and (max-width: 989px) {
+  .section .footer-content {
+    grid-template-columns: var(--grid-template-tablet, repeat(min(var(--grid-columns), 3), 1fr));
+  }
+}
+
+@media screen and (min-width: 990px) {
+  .section .footer-content {
+    grid-template-columns: var(--grid-template-desktop, repeat(var(--grid-columns), 1fr));
+  }
+}
+
 /* Títulos de columna: sobrios, sin la tracking amplia del resto del tema. */
 .footer-content .menu__heading {
   font-size: 0.9375rem;

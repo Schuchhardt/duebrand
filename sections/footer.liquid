@@ -42,6 +42,24 @@
       assign has_isolated_grid_item_desktop = true
     endif
 
+    # La plantilla de columnas se calcula acá y viaja como variable CSS, en vez
+    # de deducirla desde el CSS con selectores tipo [style*='--grid-columns: 5'].
+    # Esos dependen de que el atributo style se sirva con el mismo texto exacto
+    # y en producción no siempre calza.
+    if grid_columns == 5
+      # Marca + 3 menús + newsletter: los extremos llevan logo y formulario, así
+      # que necesitan más ancho que las columnas de enlaces.
+      assign grid_template_desktop = '1.5fr 1fr 1fr 1fr 1.8fr'
+    else
+      assign grid_template_desktop = 'repeat(' | append: grid_columns | append: ', 1fr)'
+    endif
+
+    if grid_columns > 3
+      assign grid_template_tablet = 'repeat(2, 1fr)'
+    else
+      assign grid_template_tablet = 'repeat(' | append: grid_columns | append: ', 1fr)'
+    endif
+
     if total_blocks == 5
       assign has_isolated_grid_item_tablet = true
     endif
@@ -57,6 +75,8 @@
       {%  render 'spacing-style', settings: section.settings %}
       --footer-gap: {{ section.settings.gap }}px;
       --grid-columns: {{ grid_columns }};
+      --grid-template-desktop: {{ grid_template_desktop }};
+      --grid-template-tablet: {{ grid_template_tablet }};
       --last-row-count: {{ last_row_count }};
       --tablet-last-row-count: {{ tablet_last_row_count }};
     "
@@ -81,13 +101,8 @@
 
   @media screen and (min-width: 750px) and (max-width: 989px) {
     .footer-content {
-      grid-template-columns: repeat(min(var(--grid-columns), 3), 1fr);
+      grid-template-columns: var(--grid-template-tablet, repeat(min(var(--grid-columns), 3), 1fr));
       grid-auto-flow: row;
-    }
-
-    .footer-content[style*='--grid-columns: 4'],
-    .footer-content[style*='--grid-columns: 5'] {
-      grid-template-columns: repeat(2, 1fr);
     }
 
     .footer-content--isolated-grid-item-tablet > :last-child {
@@ -97,19 +112,12 @@
 
   @media screen and (min-width: 990px) {
     .footer-content {
-      grid-template-columns: repeat(var(--grid-columns), 1fr);
+      grid-template-columns: var(--grid-template-desktop, repeat(var(--grid-columns), 1fr));
     }
 
     /* Single item centered */
     .footer-content[style*='--grid-columns: 1'] {
       justify-items: center;
-    }
-
-    /* 5 columnas = marca + 3 menús + newsletter. Las columnas de los extremos
-       llevan más contenido (logo, formulario) y necesitan más ancho que los
-       menús, que sólo tienen enlaces cortos. */
-    .footer-content[style*='--grid-columns: 5'] {
-      grid-template-columns: 1.5fr 1fr 1fr 1fr 1.8fr;
     }
 
     .footer-content--isolated-grid-item-desktop > :last-child {
