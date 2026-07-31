@@ -231,10 +231,45 @@ html {
   box-shadow: 0 4px 12px rgba(0,0,0,0.06) !important;
 }
 
-.menu-list__submenu a,
-.mega-menu a,
-.mega-menu__link {
-  color: #1C1C1A !important;
+/* ─── Mega menú: jerarquía de dos niveles ───────────────────────────────── */
+/* La regla de navegación de más arriba (uppercase + tracking 0.12em) aplasta
+   los tres niveles por igual, y el preset "inverse" del tema encima deja el
+   padre más chico y gris que sus hijos. Acá se recupera la jerarquía: el 2º
+   nivel es el título de la columna y el 3º la lista de enlaces.
+   Se apunta a la posición en el marcado (hijo directo de la columna vs. dentro
+   del <ul>) y no a la clase --parent, porque esa sólo aparece cuando el enlace
+   tiene hijos: así un enlace de 2º nivel suelto también se ve como título. */
+.mega-menu .mega-menu__column > div > .mega-menu__link {
+  padding: 0 0 10px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #1C1C1A;
+}
+
+.mega-menu .mega-menu__column > div > .mega-menu__link:hover {
+  color: #A08976;
+}
+
+.mega-menu .mega-menu__column ul .mega-menu__link {
+  padding: 4px 0;
+  font-size: 0.8125rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  text-transform: none;
+  color: #6B6560;
+}
+
+.mega-menu .mega-menu__column ul .mega-menu__link:hover {
+  color: #1C1C1A;
+}
+
+/* El panel venía con padding 3xl arriba y abajo: con la tipografía ya ajustada
+   sobra alto y el submenú tapaba media página. */
+.menu-list__submenu {
+  --submenu-padding-block-start: 32px;
+  --submenu-padding-block-end: 40px;
 }
 
 /* ─── Menú: flecha (▾) en items con sub-menú, igual que Impulse ─────────── */
@@ -268,21 +303,12 @@ html {
   --closed-underlay-height: 0px !important;
 }
 
-/* ─── Header dropdown/mega-menu: fondo blanco limpio ───────────────────── */
-.header__mega-menu,
-.mega-menu,
-.header__submenu,
-.header-section__mega-menu,
-[data-mega-menu],
-.header__dropdown {
+/* ─── Header mega-menu: fondo blanco limpio ─────────────────────────────── */
+/* El borde superior ya lo pone .menu-list__submenu; repetirlo acá dibujaba dos
+   líneas pegadas. Los colores de los enlaces los define el bloque de jerarquía
+   de más arriba. */
+.mega-menu {
   background-color: #FFFFFF !important;
-  color: #1C1C1A !important;
-  border-top: 1px solid #E8E2DC !important;
-}
-
-.mega-menu__link,
-.header__submenu a,
-.header__dropdown a {
   color: #1C1C1A !important;
 }
 

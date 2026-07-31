@@ -137,11 +137,16 @@
                     class="mega-menu__grid"
                     data-menu-grid-id="{{ list_id }}"
                   >
+                    {%- comment -%}
+                      grid_columns_count es 7 para que los 7 grupos de ROPA
+                      (bodies, vestidos, enterizos, blusas & tops, pantalones,
+                      faldas & shorts, conjuntos) quepan en una sola fila.
+                    {%- endcomment -%}
                     {% render 'mega-menu-list',
                       parent_link: link,
                       id: list_id,
                       section: section,
-                      grid_columns_count: 6,
+                      grid_columns_count: 7,
                       grid_columns_count_tablet: 4,
                       grid_columns_count_collection_images: 8,
                       menu_content_type: menu_content_type,
