@@ -12,7 +12,7 @@
   <div {{ block.shopify_attributes }}>
     {%- form 'localization', class: 'footer-localization' -%}
       {%- capture country_label -%}
-        {{- localization.country.name }} ({{ localization.country.currency.iso_code }} {{ localization.country.currency.symbol }})
+        {{- localization.country.name }} &middot; {{ localization.country.currency.iso_code }} {{ localization.country.currency.symbol }}
       {%- endcapture -%}
       <span class="footer-localization__display" aria-hidden="true">{{ country_label | strip }}</span>
       <select
@@ -28,7 +28,7 @@
               selected
             {% endif %}
           >
-            {{- country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
+            {{- country.name }} &middot; {{ country.currency.iso_code }} {{ country.currency.symbol }}
           </option>
         {%- endfor -%}
       </select>

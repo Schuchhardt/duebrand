@@ -1,4 +1,9 @@
 {% assign block_settings = block.settings %}
+{%- liquid
+  # El nombre de la tienda en Shopify puede no estar escrito como se quiere ver
+  # en el footer, así que se puede sobrescribir aquí.
+  assign copyright_name = block_settings.custom_text | default: shop.name
+-%}
 <div
   class="
     footer-utilities__group-copyright
@@ -13,7 +18,7 @@
 >
   <span class="footer-utilities__text">
     &copy; {{ 'now' | date: '%Y' }}
-    {{ shop.name | link_to: routes.root_url -}}
+    {{ copyright_name | escape | link_to: routes.root_url -}}
     {%- if block_settings.show_powered_by -%}
       , {{ powered_by_link }}
     {%- endif -%}
@@ -36,6 +41,12 @@
       "id": "show_powered_by",
       "label": "t:settings.show_powered_by_shopify",
       "default": true
+    },
+    {
+      "type": "text",
+      "id": "custom_text",
+      "label": "Nombre a mostrar",
+      "info": "Si lo dejas vacío se usa el nombre de la tienda."
     },
     {
       "type": "paragraph",

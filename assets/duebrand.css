@@ -296,8 +296,7 @@ html {
   display: inline-flex;
   align-items: center;
   font-size: 0.75rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0.04em;
   white-space: nowrap;
   color: var(--color-utilities, var(--color-foreground-muted));
 }
@@ -334,15 +333,58 @@ html {
   letter-spacing: normal;
 }
 
-/* ─── Footer: "Únete a [logo]" ──────────────────────────────────────────── */
-/* El logo es un PNG con texto oscuro; el footer tiene fondo oscuro, así que
-   lo pasamos a blanco puro con filtro en vez de depender de un archivo aparte. */
-.footer-content .logo-block__image {
-  filter: brightness(0) invert(1);
-}
-
+/* ─── Footer: columna de marca, menús y newsletter ──────────────────────── */
+/* El bloque de logo ya apunta al archivo blanco (ajuste "Versión para fondo
+   oscuro"), así que aquí no hace falta ningún filtro de color. */
 .footer-content .logo-block {
   flex-shrink: 0;
+}
+
+/* Sin esto el ancho mínimo del formulario (min-width: fit-content) le gana a
+   la fracción de grilla y descuadra las cinco columnas. */
+.footer-content > *,
+.footer-content .email-signup-block {
+  min-width: 0;
+}
+
+/* Títulos de columna: sobrios, sin la tracking amplia del resto del tema. */
+.footer-content .menu__heading {
+  font-size: 0.9375rem;
+  letter-spacing: 0.02em;
+}
+
+.footer-content .menu__item a {
+  font-size: 0.875rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+}
+
+/* Bajada de marca y textos de apoyo: un punto por debajo del blanco. */
+.footer-content p {
+  opacity: 0.75;
+  line-height: 1.6;
+}
+
+/* Redes de la columna de marca: más grandes que las de la barra inferior. */
+.footer-content .social-icons__wrapper {
+  gap: 18px;
+}
+
+.footer-content .social-icons__icon {
+  width: 24px;
+  height: 24px;
+}
+
+/* Suscripción: el botón va pegado al borde del recuadro y a toda su altura,
+   no flotando dentro con margen como trae el tema por defecto. */
+.footer-content .email-signup__button--integrated {
+  --button-offset: 0px;
+
+  margin: 0;
+  align-self: stretch;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 
 /* ═══════════════════════════════════════════════════════════════════════

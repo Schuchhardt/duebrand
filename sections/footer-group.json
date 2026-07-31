@@ -14,6 +14,122 @@
     "footer": {
       "type": "footer",
       "blocks": {
+        "brand_column": {
+          "type": "group",
+          "name": "Marca",
+          "settings": {
+            "content_direction": "column",
+            "vertical_on_mobile": true,
+            "horizontal_alignment": "flex-start",
+            "vertical_alignment": "flex-start",
+            "align_baseline": false,
+            "horizontal_alignment_flex_direction_column": "flex-start",
+            "vertical_alignment_flex_direction_column": "flex-start",
+            "gap": 20,
+            "width": "fill",
+            "custom_width": 100,
+            "width_mobile": "fill",
+            "custom_width_mobile": 100,
+            "height": "fit",
+            "custom_height": 100,
+            "background_media": "none",
+            "background_color": "",
+            "video_position": "cover",
+            "background_image_position": "cover",
+            "toggle_overlay": false,
+            "overlay_color": "#00000026",
+            "overlay_style": "solid",
+            "gradient_direction": "to top",
+            "border": "none",
+            "border_width": 1,
+            "border_opacity": 100,
+            "border_color": "",
+            "border_radius": 0,
+            "link": "",
+            "open_in_new_tab": false,
+            "placeholder": "",
+            "padding-block-start": 0,
+            "padding-block-end": 0,
+            "padding-inline-start": 0,
+            "padding-inline-end": 0
+          },
+          "blocks": {
+            "brand_logo": {
+              "type": "logo",
+              "name": "Logo Duebrand",
+              "settings": {
+                "logo_source": "vertical",
+                "inverse": true,
+                "font": "heading",
+                "text_color": "",
+                "unit": "pixel",
+                "percent_width": 100,
+                "pixel_height": 96,
+                "custom_mobile_size": true,
+                "unit_mobile": "pixel",
+                "percent_width_mobile": 100,
+                "pixel_height_mobile": 80,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "brand_tagline": {
+              "type": "text",
+              "name": "Bajada de marca",
+              "settings": {
+                "text": "<p>Moda para sentirte tú.</p>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "rte",
+                "font": "var(--font-body--family)",
+                "font_size": "",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "brand_social": {
+              "type": "social-links",
+              "name": "Redes sociales",
+              "settings": {
+                "icon_color": "",
+                "facebook_url": "",
+                "instagram_url": "https://www.instagram.com/duebrand.cl/",
+                "youtube_url": "",
+                "tiktok_url": "https://www.tiktok.com",
+                "twitter_url": "",
+                "threads_url": "",
+                "linkedin_url": "",
+                "bluesky_url": "",
+                "snapchat_url": "",
+                "pinterest_url": "",
+                "tumblr_url": "",
+                "vimeo_url": "",
+                "custom_url": ""
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "brand_logo",
+            "brand_tagline",
+            "brand_social"
+          ]
+        },
         "menu_footer": {
           "type": "menu",
           "settings": {
@@ -114,105 +230,37 @@
             "padding-inline-end": 0
           },
           "blocks": {
-            "group_join": {
-              "type": "group",
-              "name": "Únete a + logo",
+            "newsletter_heading": {
+              "type": "text",
+              "name": "Título newsletter",
               "settings": {
-                "content_direction": "row",
-                "vertical_on_mobile": false,
-                "horizontal_alignment": "flex-start",
-                "vertical_alignment": "center",
-                "align_baseline": false,
-                "horizontal_alignment_flex_direction_column": "flex-start",
-                "vertical_alignment_flex_direction_column": "center",
-                "gap": 10,
-                "width": "fit-content",
-                "custom_width": 100,
-                "width_mobile": "fit-content",
-                "custom_width_mobile": 100,
-                "height": "fit",
-                "custom_height": 100,
-                "background_media": "none",
-                "background_color": "",
-                "video_position": "cover",
-                "background_image_position": "cover",
-                "toggle_overlay": false,
-                "overlay_color": "#00000026",
-                "overlay_style": "solid",
-                "gradient_direction": "to top",
-                "border": "none",
-                "border_width": 1,
-                "border_opacity": 100,
-                "border_color": "",
-                "border_radius": 0,
-                "link": "",
-                "open_in_new_tab": false,
-                "placeholder": "",
+                "text": "<h2>Únete a Duebrand</h2>",
+                "width": "100%",
+                "max_width": "none",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "1rem",
+                "line_height": "normal",
+                "letter_spacing": "loose",
+                "case": "uppercase",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
                 "padding-inline-end": 0
               },
-              "blocks": {
-                "text_pF6rVi": {
-                  "type": "text",
-                  "name": "Heading",
-                  "settings": {
-                    "text": "<h2>Únete a</h2>",
-                    "width": "fit-content",
-                    "max_width": "none",
-                    "alignment": "left",
-                    "type_preset": "h3",
-                    "font": "var(--font-body--family)",
-                    "font_size": "",
-                    "line_height": "normal",
-                    "letter_spacing": "normal",
-                    "case": "none",
-                    "wrap": "pretty",
-                    "text_color": "",
-                    "background": false,
-                    "background_color": "#00000026",
-                    "corner_radius": 0,
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  },
-                  "blocks": {}
-                },
-                "logo_join": {
-                  "type": "logo",
-                  "name": "Logo Duebrand",
-                  "settings": {
-                    "logo_source": "vertical",
-                    "inverse": false,
-                    "font": "heading",
-                    "text_color": "",
-                    "unit": "pixel",
-                    "percent_width": 100,
-                    "pixel_height": 56,
-                    "custom_mobile_size": true,
-                    "unit_mobile": "pixel",
-                    "percent_width_mobile": 100,
-                    "pixel_height_mobile": 48,
-                    "padding-block-start": 0,
-                    "padding-block-end": 0,
-                    "padding-inline-start": 0,
-                    "padding-inline-end": 0
-                  },
-                  "blocks": {}
-                }
-              },
-              "block_order": [
-                "text_pF6rVi",
-                "logo_join"
-              ]
+              "blocks": {}
             },
             "text_HafH7P": {
               "type": "text",
               "name": "Text",
               "settings": {
-                "text": "<p>Descubre las últimas colecciones y recibe acceso exclusivo antes que nadie.</p>",
+                "text": "<p>Nuevas colecciones, inspiración y beneficios exclusivos.</p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -238,28 +286,55 @@
               "type": "email-signup",
               "name": "Email Signup",
               "settings": {
-                "width": "custom",
-                "custom_width": 80,
+                "width": "fill",
+                "custom_width": 100,
                 "heading": "",
                 "heading_text_color": "",
                 "heading_preset": "h3",
+                "placeholder": "Tu correo electrónico",
                 "border_style": "all",
                 "input_style": "custom",
                 "border_width": 1,
-                "border_radius": 2,
-                "input_background_color": "#282f3f",
-                "input_text_color": "",
-                "input_border_color": "",
+                "border_radius": 0,
+                "input_background_color": "#2F2925",
+                "input_text_color": "#FFFFFF",
+                "input_border_color": "#8A7C70",
                 "input_type_preset": "paragraph",
                 "style_class": "button-custom",
-                "custom_button_background": "{{ settings.color_palette.foreground }}",
-                "custom_button_text": "{{ settings.color_palette.background }}",
-                "custom_button_border": "{{ settings.color_palette.foreground }}",
+                "custom_button_background": "{{ settings.color_palette.color3 }}",
+                "custom_button_text": "#FFFFFF",
+                "custom_button_border": "{{ settings.color_palette.color3 }}",
                 "link_text_color": "",
-                "display_type": "arrow",
-                "label": "Suscribirse",
+                "display_type": "text",
+                "label": "Suscribirme",
                 "integrated_button": true,
                 "button_type_preset": "paragraph",
+                "padding-block-start": 0,
+                "padding-block-end": 0,
+                "padding-inline-start": 0,
+                "padding-inline-end": 0
+              },
+              "blocks": {}
+            },
+            "newsletter_note": {
+              "type": "text",
+              "name": "Nota newsletter",
+              "settings": {
+                "text": "<p>Sin spam. Puedes salir cuando quieras.</p>",
+                "width": "100%",
+                "max_width": "normal",
+                "alignment": "left",
+                "type_preset": "custom",
+                "font": "var(--font-body--family)",
+                "font_size": "0.75rem",
+                "line_height": "normal",
+                "letter_spacing": "normal",
+                "case": "none",
+                "wrap": "pretty",
+                "text_color": "",
+                "background": false,
+                "background_color": "#00000026",
+                "corner_radius": 0,
                 "padding-block-start": 0,
                 "padding-block-end": 0,
                 "padding-inline-start": 0,
@@ -269,13 +344,15 @@
             }
           },
           "block_order": [
-            "group_join",
+            "newsletter_heading",
             "text_HafH7P",
-            "email-signup_HafH7P"
+            "email-signup_HafH7P",
+            "newsletter_note"
           ]
         }
       },
       "block_order": [
+        "brand_column",
         "menu_footer",
         "menu_company",
         "menu_help",
@@ -301,6 +378,7 @@
           "name": "t:names.copyright",
           "settings": {
             "show_powered_by": false,
+            "custom_text": "DUEBRAND",
             "text_color": "",
             "font_size": "0.75rem",
             "case": "none"
@@ -310,9 +388,10 @@
         "policy_list": {
           "type": "footer-policy-list",
           "settings": {
+            "layout": "inline",
             "text_color": "",
             "font_size": "0.75rem",
-            "case": "uppercase"
+            "case": "none"
           },
           "blocks": {}
         },
@@ -320,33 +399,12 @@
           "type": "footer-localization",
           "settings": {},
           "blocks": {}
-        },
-        "social_icons": {
-          "type": "social-links",
-          "settings": {
-            "icon_color": "",
-            "facebook_url": "https://www.facebook.com",
-            "instagram_url": "https://www.instagram.com/duebrand.cl/",
-            "youtube_url": "https://www.youtube.com",
-            "tiktok_url": "https://www.tiktok.com",
-            "twitter_url": "https://www.twitter.com",
-            "threads_url": "",
-            "linkedin_url": "",
-            "bluesky_url": "",
-            "snapchat_url": "",
-            "pinterest_url": "",
-            "tumblr_url": "",
-            "vimeo_url": "",
-            "custom_url": ""
-          },
-          "blocks": {}
         }
       },
       "block_order": [
         "footer_copyright_CkeGUP",
         "policy_list",
-        "footer_localization",
-        "social_icons"
+        "footer_localization"
       ],
       "settings": {
         "section_width": "page-width",

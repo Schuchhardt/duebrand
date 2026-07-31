@@ -1,4 +1,29 @@
-{% if shop.policies.size > 0 %}
+{% if shop.policies.size > 0 and block.settings.layout == 'inline' %}
+  {%- comment -%}
+    Modo "en línea": las políticas se listan una al lado de otra separadas por
+    una barra, sin popover. Es lo que pide el diseño del footer de Due Brand.
+  {%- endcomment -%}
+  <ul
+    class="
+      policy-list-inline list-unstyled
+      custom-typography
+      {% if block.settings.font_size != "" %}custom-font-size{% endif %}
+    "
+    style="
+      {% render 'typography-style', preset: 'custom', settings: block.settings %}
+      {% if block.settings.text_color != blank %}--color-utilities: {{ block.settings.text_color }};{% endif %}
+    "
+    {{ block.shopify_attributes }}
+  >
+    {%- for policy in shop.policies -%}
+      {%- if policy != blank -%}
+        <li>
+          <a href="{{ policy.url }}" class="footer-utilities__text">{{ policy.title | escape }}</a>
+        </li>
+      {%- endif -%}
+    {%- endfor -%}
+  </ul>
+{% elsif shop.policies.size > 0 %}
   <anchored-popover-component
     data-hover-triggered="true"
   >
@@ -46,6 +71,38 @@
 {% endif %}
 
 {% stylesheet %}
+  .policy-list-inline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: var(--gap-sm);
+    margin: 0;
+    padding: 0;
+  }
+
+  .policy-list-inline li {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-sm);
+  }
+
+  .policy-list-inline li + li::before {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 0.9em;
+    background: currentcolor;
+    opacity: 0.35;
+  }
+
+  .policy-list-inline a {
+    color: var(--color-utilities, var(--color-foreground-muted));
+    font-size: var(--font-size, 0.75rem);
+    text-transform: var(--text-transform, none);
+    white-space: nowrap;
+  }
+
   .policy-list-trigger {
     anchor-name: --terms-policies-trigger;
     cursor: pointer;
@@ -155,6 +212,22 @@
     {
       "type": "header",
       "content": "t:content.appearance"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Presentación",
+      "options": [
+        {
+          "value": "popover",
+          "label": "Un botón que abre la lista"
+        },
+        {
+          "value": "inline",
+          "label": "Enlaces uno al lado del otro"
+        }
+      ],
+      "default": "popover"
     },
     {
       "type": "color",
