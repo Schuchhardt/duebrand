@@ -12,29 +12,11 @@
     "section": {
       "type": "section",
       "blocks": {
-        "text_tqQTNE": {
-          "type": "text",
-          "name": "Title",
+        "custom_liquid_6MfbQ9": {
+          "type": "custom-liquid",
+          "name": "t:names.custom_liquid",
           "settings": {
-            "text": "<h3>BODIES</h3>",
-            "width": "fit-content",
-            "max_width": "normal",
-            "alignment": "left",
-            "type_preset": "rte",
-            "font": "var(--font-primary--family)",
-            "font_size": "",
-            "line_height": "normal",
-            "letter_spacing": "normal",
-            "case": "none",
-            "wrap": "pretty",
-            "text_color": "",
-            "background": false,
-            "background_color": "#00000026",
-            "corner_radius": 0,
-            "padding-block-start": 0,
-            "padding-block-end": 0,
-            "padding-inline-start": 0,
-            "padding-inline-end": 0
+            "custom_liquid": "{%- liquid\n  assign titulo = collection.title\n  if collection.current_tags.size > 0\n    assign etiqueta = collection.current_tags | first\n    case etiqueta\n      when 'Corset'\n        assign titulo = 'Corsets'\n      when 'Basicos'\n        assign titulo = 'Básicos'\n      when 'Bluson'\n        assign titulo = 'Blusones'\n      when 'Blusa'\n        assign titulo = 'Blusas'\n      when 'Crop'\n        assign titulo = 'Crops'\n      when 'Top'\n        assign titulo = 'Tops'\n      when 'Joguer'\n        assign titulo = 'Joggers'\n      when 'Falda'\n        assign titulo = 'Faldas'\n      when 'Short'\n        assign titulo = 'Shorts'\n      when 'Short Falda'\n        assign titulo = 'Short Faldas'\n      when 'Set'\n        assign titulo = 'Sets'\n      else\n        assign titulo = etiqueta\n    endcase\n  endif\n-%}\n<h1 class=\"h2\">{{ titulo }}</h1>"
           },
           "blocks": {}
         },
@@ -66,7 +48,7 @@
         }
       },
       "block_order": [
-        "text_tqQTNE",
+        "custom_liquid_6MfbQ9",
         "text_twGGkJ"
       ],
       "name": "Collection heading",
