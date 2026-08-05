@@ -16,7 +16,7 @@
           "type": "text",
           "name": "Title",
           "settings": {
-            "text": "<h3>BODIES</h3>",
+            "text": "<h3>CORSETS</h3>",
             "width": "fit-content",
             "max_width": "normal",
             "alignment": "left",
